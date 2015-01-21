@@ -1,0 +1,39 @@
+# EditorConfig root file
+# Options not specified have no effect
+
+# Indicates the top level directory in our source tree
+root = true
+
+[*]
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# eol handled by git
+# See safecrlf/autocrlf git config options
+#end_of_line=crlf
+
+#charset=utf-8
+
+[*.{c,h,m}]
+indent_style = tab
+indent_size = 4
+tab_width = 8
+
+[*.pl]
+indent_style = tab
+indent_size = 2
+tab_width = 8
+
+[*.sh]
+indent_style = space
+indent_size = 2
+tab_width = 2
+
+[*.py]
+indent_style = space
+indent_size = 4
+tab_width = 4
+
+[testdata/*.txt]
+trim_trailing_whitespace = false
+insert_final_newline = false
