@@ -34,7 +34,7 @@ int dsa_generate(struct dss_key *key, int bits, progfn_t pfn,
      * P(1-P), in three with probability P(1-P)^2, etc. The
      * probability that we have still not managed to find a prime
      * after N attempts is (1-P)^N.
-     * 
+     *
      * We therefore inform the progress indicator of the number B
      * (29.34/B), so that it knows how much to increment by each
      * time. We do this in 16-bit fixed point, so 29.34 becomes

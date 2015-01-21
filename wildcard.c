@@ -14,7 +14,7 @@
 
 /*
  * Definition of wildcard syntax:
- * 
+ *
  *  - * matches any sequence of characters, including zero.
  *  - ? matches exactly one character which can be anything.
  *  - [abc] matches exactly one character which is a, b or c.
@@ -51,7 +51,7 @@
  * absence of any other need for the NFA->DFA translation engine,
  * anything more than the simplest possible wildcard matcher is
  * vast code-size overkill.
- * 
+ *
  * Essentially, these wildcards are much simpler than regexps in
  * that they consist of a sequence of rigid fragments (? and [...]
  * can never match more or less than one character) separated by
@@ -194,7 +194,7 @@ static int wc_match_fragment(const char **fragment, const char **target)
     }
     /*
      * Otherwise, we must have reached the end of t before we
-     * reached the end of f; so we've failed. Return 0. 
+     * reached the end of f; so we've failed. Return 0.
      */
     return 0;
 }
@@ -253,7 +253,7 @@ int wc_match(const char *wildcard, const char *target)
 	    if (ret > 0 && !*wildcard && *target) {
 		/*
 		 * Final special case - literally.
-		 * 
+		 *
 		 * This situation arises when we are matching a
 		 * _terminal_ fragment of the wildcard (that is,
 		 * there is nothing after it, e.g. "*a"), and it
@@ -263,7 +263,7 @@ int wc_match(const char *wildcard, const char *target)
 		 * for this special case) matching would fail
 		 * because we're at the end of the wildcard but not
 		 * at the end of the target string.
-		 * 
+		 *
 		 * In this case what we must do is measure the
 		 * length of the fragment in the target (which is
 		 * why we saved `target'), jump straight to that
@@ -301,7 +301,7 @@ int wc_match(const char *wildcard, const char *target)
  * Expects a target string buffer of anything up to the length of
  * the original wildcard. You can also pass NULL as the output
  * buffer if you're only interested in the return value.
- * 
+ *
  * Returns 1 on success, or 0 if a wildcard character was
  * encountered. In the latter case the output string MAY not be
  * zero-terminated and you should not use it for anything!

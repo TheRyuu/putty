@@ -58,10 +58,10 @@
 /*
  * External references. The sftp client module sftp.c expects to be
  * able to get at these functions.
- * 
+ *
  * sftp_recvdata must never return less than len. It either blocks
  * until len is available, or it returns failure.
- * 
+ *
  * Both functions return 1 on success, 0 on failure.
  */
 int sftp_senddata(char *data, int len);

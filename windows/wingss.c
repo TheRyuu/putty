@@ -224,7 +224,7 @@ static Ssh_gss_stat ssh_sspi_import_name(struct ssh_gss_library *lib,
 
     /* Check hostname */
     if (host == NULL) return SSH_GSS_FAILURE;
-    
+
     /* copy it into form host/FQDN */
     pStr = dupcat("host/", host, NULL);
 
@@ -257,7 +257,7 @@ static Ssh_gss_stat ssh_sspi_acquire_cred(struct ssh_gss_library *lib,
 						   &winctx->expiry);
 
     if (winctx->maj_stat != SEC_E_OK) return SSH_GSS_FAILURE;
-    
+
     *ctx = (Ssh_gss_ctx) winctx;
     return SSH_GSS_OK;
 }
@@ -278,7 +278,7 @@ static Ssh_gss_stat ssh_sspi_init_sec_context(struct ssh_gss_library *lib,
     unsigned long flags=ISC_REQ_MUTUAL_AUTH|ISC_REQ_REPLAY_DETECT|
 	ISC_REQ_CONFIDENTIALITY|ISC_REQ_ALLOCATE_MEMORY;
     unsigned long ret_flags=0;
-    
+
     /* check if we have to delegate ... */
     if (to_deleg) flags |= ISC_REQ_DELEGATE;
     winctx->maj_stat = p_InitializeSecurityContextA(&winctx->cred_handle,
@@ -293,16 +293,16 @@ static Ssh_gss_stat ssh_sspi_init_sec_context(struct ssh_gss_library *lib,
 						    &output_desc,
 						    &ret_flags,
 						    &winctx->expiry);
-  
+
     /* prepare for the next round */
     winctx->context_handle = &winctx->context;
     send_tok->value = wsend_tok.pvBuffer;
     send_tok->length = wsend_tok.cbBuffer;
-  
+
     /* check & return our status */
     if (winctx->maj_stat==SEC_E_OK) return SSH_GSS_S_COMPLETE;
     if (winctx->maj_stat==SEC_I_CONTINUE_NEEDED) return SSH_GSS_S_CONTINUE_NEEDED;
-    
+
     return SSH_GSS_FAILURE;
 }
 
@@ -315,7 +315,7 @@ static Ssh_gss_stat ssh_sspi_free_tok(struct ssh_gss_library *lib,
     /* free Windows buffer */
     p_FreeContextBuffer(send_tok->value);
     SSH_GSS_CLEAR_BUF(send_tok);
-    
+
     return SSH_GSS_OK;
 }
 
@@ -398,7 +398,7 @@ static Ssh_gss_stat ssh_sspi_display_status(struct ssh_gss_library *lib,
 
     buf->value = dupstr(msg);
     buf->length = strlen(buf->value);
-    
+
     return SSH_GSS_OK;
 }
 
@@ -412,7 +412,7 @@ static Ssh_gss_stat ssh_sspi_get_mic(struct ssh_gss_library *lib,
     SecBuffer InputSecurityToken[2];
 
     if (winctx == NULL) return SSH_GSS_FAILURE;
-  
+
     winctx->maj_stat = 0;
 
     memset(&ContextSizes, 0, sizeof(ContextSizes));
@@ -420,7 +420,7 @@ static Ssh_gss_stat ssh_sspi_get_mic(struct ssh_gss_library *lib,
     winctx->maj_stat = p_QueryContextAttributesA(&winctx->context,
 						 SECPKG_ATTR_SIZES,
 						 &ContextSizes);
-    
+
     if (winctx->maj_stat != SEC_E_OK ||
 	ContextSizes.cbMaxSignature == 0)
 	return winctx->maj_stat;

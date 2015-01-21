@@ -54,7 +54,7 @@ static void arcfour_setkey(ArcfourContext *ctx, unsigned char const *key,
  * We don't implement Arcfour in SSH-1 because it's utterly insecure in
  * several ways.  See CERT Vulnerability Notes VU#25309, VU#665372,
  * and VU#565052.
- * 
+ *
  * We don't implement the "arcfour" algorithm in SSH-2 because it doesn't
  * stir the cipher state before emitting keystream, and hence is likely
  * to leak data about the key.

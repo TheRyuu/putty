@@ -339,9 +339,9 @@ int findIndexOfRun(unsigned char* level , int start, int count, int tlevel)
  *
  * The data table in this function is constructed from the Unicode
  * Character Database, downloadable from unicode.org at the URL
- * 
+ *
  *     http://www.unicode.org/Public/UNIDATA/UnicodeData.txt
- * 
+ *
  * by the following fragment of Perl:
 
 perl -ne 'split ";"; $num = hex $_[0]; $type = $_[4];' \
@@ -1011,14 +1011,14 @@ unsigned char getType(int ch)
  * text display function can't conveniently be prevented from doing
  * its own bidi and so special treatment is required for characters
  * that would cause the bidi algorithm to activate).
- * 
+ *
  * This function is passed a single Unicode code point, and returns
  * nonzero if the presence of this code point can possibly cause
  * the bidi algorithm to do any reordering. Thus, any string
  * composed entirely of characters for which is_rtl() returns zero
  * should be safe to pass to a bidi-active platform display
  * function without fear.
- * 
+ *
  * (is_rtl() must therefore also return true for any character
  * which would be affected by Arabic shaping, but this isn't
  * important because all such characters are right-to-left so it

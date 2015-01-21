@@ -28,7 +28,7 @@ void proxy_activate (Proxy_Socket p)
     void *data;
     int len;
     long output_before, output_after;
-    
+
     p->state = PROXY_STATE_ACTIVE;
 
     /* we want to ignore new receive events until we have sent
@@ -41,7 +41,7 @@ void proxy_activate (Proxy_Socket p)
 	bufchain_size(&p->pending_output_data);
     /* and keep track of how many bytes do not get sent. */
     output_after = 0;
-    
+
     /* send buffered OOB writes */
     while (bufchain_size(&p->pending_oob_output_data) > 0) {
 	bufchain_prefix(&p->pending_oob_output_data, &data, &len);
@@ -150,14 +150,14 @@ static void sk_proxy_set_frozen (Socket s, int is_frozen)
 	ps->freeze = is_frozen;
 	return;
     }
-    
+
     /* handle any remaining buffered recv data first */
     if (bufchain_size(&ps->pending_input_data) > 0) {
 	ps->freeze = is_frozen;
 
 	/* loop while we still have buffered data, and while we are
-	 * unfrozen. the plug_receive call in the loop could result 
-	 * in a call back into this function refreezing the socket, 
+	 * unfrozen. the plug_receive call in the loop could result
+	 * in a call back into this function refreezing the socket,
 	 * so we have to check each time.
 	 */
         while (!ps->freeze && bufchain_size(&ps->pending_input_data) > 0) {
@@ -177,7 +177,7 @@ static void sk_proxy_set_frozen (Socket s, int is_frozen)
 	 */
 	if (ps->freeze) return;
     }
-    
+
     sk_set_frozen(ps->sub_socket, is_frozen);
 }
 
@@ -824,7 +824,7 @@ int proxy_socks4_negotiate (Proxy_Socket p, int change)
 	     *    90 = request granted
 	     *    91 = request rejected or failed
 	     *    92 = request rejected due to lack of IDENTD on client
-	     *    93 = request rejected due to difference in user ID 
+	     *    93 = request rejected due to difference in user ID
 	     *         (what we sent vs. what IDENTD said)
 	     *  dest. port (2 bytes)
 	     *  dest. address (4 bytes)
@@ -834,7 +834,7 @@ int proxy_socks4_negotiate (Proxy_Socket p, int change)
 
 	    if (bufchain_size(&p->pending_input_data) < 8)
 		return 1;	       /* not got anything yet */
-	    
+
 	    /* get the response */
 	    bufchain_fetch(&p->pending_input_data, data, 8);
 
@@ -1113,7 +1113,7 @@ int proxy_socks5_negotiate (Proxy_Socket p, int change)
 	    char data[5];
 	    int len;
 
-	    /* First 5 bytes of packet are enough to tell its length. */ 
+	    /* First 5 bytes of packet are enough to tell its length. */
 	    if (bufchain_size(&p->pending_input_data) < 5)
 		return 1;	       /* not got anything yet */
 
@@ -1197,7 +1197,7 @@ int proxy_socks5_negotiate (Proxy_Socket p, int change)
 		memcpy(userpwbuf+ulen+3, password, plen);
 		sk_write(p->sub_socket, userpwbuf, ulen + plen + 3);
 		p->state = 7;
-	    } else 
+	    } else
 		plug_closing(p->plug, "Proxy error: Server chose "
 			     "username/password authentication but we "
 			     "didn't offer it!",
@@ -1240,7 +1240,7 @@ char *format_telnet_command(SockAddr addr, int port, Conf *conf)
     } \
 } while (0)
 
-    /* we need to escape \\, \%, \r, \n, \t, \x??, \0???, 
+    /* we need to escape \\, \%, \r, \n, \t, \x??, \0???,
      * %%, %host, %port, %user, and %pass
      */
 

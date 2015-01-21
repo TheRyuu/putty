@@ -247,7 +247,7 @@ int askappend(void *frontend, Filename *filename,
 
 /*
  * Warn about the obsolescent key file format.
- * 
+ *
  * Uniquely among these functions, this one does _not_ expect a
  * frontend handle. This means that if PuTTY is ported to a
  * platform which requires frontend handles, this function will be

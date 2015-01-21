@@ -367,7 +367,7 @@ int sel_iterate(sel *sel, long timeout)
 	    }
     } while (wfd);
     do {
-	for (rfd = sel->rhead; rfd; rfd = rfd->next) 
+	for (rfd = sel->rhead; rfd; rfd = rfd->next)
 	    if (rfd->fd >= 0 && !rfd->frozen && FD_ISSET(rfd->fd, &rset)) {
 		FD_CLR(rfd->fd, &rset);
 		ret = read(rfd->fd, buf, sizeof(buf));

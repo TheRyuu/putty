@@ -1,6 +1,6 @@
 /*
  * uxsel.c
- * 
+ *
  * This module is a sort of all-purpose interchange for file
  * descriptors. At one end it talks to uxnet.c and pty.c and
  * anything else which might have one or more fds that need
@@ -88,7 +88,7 @@ void uxsel_del(int fd)
 
 /*
  * And here is the interface to select-functionality-supplying
- * modules. 
+ * modules.
  */
 
 int next_fd(int *state, int *rwx)

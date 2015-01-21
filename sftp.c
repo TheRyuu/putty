@@ -1266,7 +1266,7 @@ int xfer_download_gotpkt(struct fxp_xfer *xfer, struct sftp_packet *pktin)
 	    xfer->filesize = filesize;
 #ifdef DEBUG_DOWNLOAD
 	    printf("actually changing filesize\n");
-#endif	    
+#endif
 	}
     }
 

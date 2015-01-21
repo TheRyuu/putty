@@ -281,7 +281,7 @@ static const char *serial_configure(Serial serial, Conf *conf)
 
 /*
  * Called to set up the serial connection.
- * 
+ *
  * Returns an error message, or NULL on success.
  *
  * Also places the canonical host name into `realhost'. It must be

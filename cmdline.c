@@ -14,14 +14,14 @@
  * eventual running configuration. For this we use the macro
  * SAVEABLE, which notices if the `need_save' parameter is set and
  * saves the parameter and value on a list.
- * 
+ *
  * We also assign priorities to saved parameters, just to slightly
  * ameliorate silly ordering problems. For example, if you specify
  * a saved session to load, it will be loaded _before_ all your
  * local modifications such as -L are evaluated; and if you specify
  * a protocol and a port, the protocol is set up first so that the
  * port can override its choice of port number.
- * 
+ *
  * (In fact -load is not saved at all, since in at least Plink the
  * processing of further command-line options depends on whether or
  * not the loaded session contained a hostname. So it must be
@@ -67,7 +67,7 @@ void cmdline_cleanup(void)
 	sfree(cmdline_password);
 	cmdline_password = NULL;
     }
-    
+
     for (pri = 0; pri < NPRIORITIES; pri++) {
 	sfree(saves[pri].params);
 	saves[pri].params = NULL;

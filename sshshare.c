@@ -577,7 +577,7 @@ static struct share_channel *share_add_channel
     if (chan->state != UNACKNOWLEDGED) {
         if (add234(cs->channels_by_server, chan) != chan) {
             del234(cs->channels_by_us, chan);
-            sfree(chan);            
+            sfree(chan);
             return NULL;
         }
     }
@@ -1510,7 +1510,7 @@ static void share_got_pkt_from_downstream(struct ssh_sharing_connstate *cs,
             err = dupprintf("CHANNEL_OPEN_CONFIRMATION packet cited unknown channel %u", (unsigned)server_id);
             goto confused;
         }
-            
+
         PUT_32BIT(pkt + id_pos, new_id);
 
         chan = share_add_channel(cs, old_id, new_id, server_id, OPEN,

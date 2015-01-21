@@ -76,7 +76,7 @@ static void random_stir(void)
         for (p = 0; p < POOLSIZE; p += HASHSIZE) {
             printf("   ");
             for (q = 0; q < HASHSIZE; q += 4) {
-                printf(" %08x", *(word32 *)(pool.pool + p + q));            
+                printf(" %08x", *(word32 *)(pool.pool + p + q));
             }
             printf("\n");
         }
@@ -152,7 +152,7 @@ static void random_stir(void)
             for (p = 0; p < POOLSIZE; p += HASHSIZE) {
                 printf("   ");
                 for (q = 0; q < HASHSIZE; q += 4) {
-                    printf(" %08x", *(word32 *)(pool.pool + p + q));            
+                    printf(" %08x", *(word32 *)(pool.pool + p + q));
                 }
                 printf("\n");
             }
@@ -187,7 +187,7 @@ static void random_stir(void)
         for (p = 0; p < POOLSIZE; p += HASHSIZE) {
             printf("   ");
             for (q = 0; q < HASHSIZE; q += 4) {
-                printf(" %08x", *(word32 *)(pool.pool + p + q));            
+                printf(" %08x", *(word32 *)(pool.pool + p + q));
             }
             printf("\n");
         }

@@ -78,7 +78,7 @@ static int handle_gotdata(struct handle *h, void *data, int len)
 static void handle_sentdata(struct handle *h, int new_backlog)
 {
     Handle_Socket ps = (Handle_Socket) handle_get_privdata(h);
-    
+
     plug_sent(ps->plug, new_backlog);
 }
 

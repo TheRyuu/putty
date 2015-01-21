@@ -161,7 +161,7 @@ struct PassphraseProcStruct {
 
 static tree234 *passphrases = NULL;
 
-/* 
+/*
  * After processing a list of filenames, we want to forget the
  * passphrases.
  */
@@ -391,7 +391,7 @@ static void add_keyfile(Filename *filename)
     const char *error = NULL;
     int type;
     int original_pass;
-	
+
     type = key_type(filename);
     if (type != SSH_KEYTYPE_SSH1 && type != SSH_KEYTYPE_SSH2) {
 	char *msg = dupprintf("Couldn't load this key (%s)",
@@ -1435,7 +1435,7 @@ static void prompt_add_keyfile(void)
 {
     OPENFILENAME of;
     char *filelist = snewn(8192, char);
-	
+
     if (!keypath) keypath = filereq_new();
     memset(&of, 0, sizeof(of));
     of.hwndOwner = hwnd;
@@ -1547,14 +1547,14 @@ static int CALLBACK KeyListProc(HWND hwnd, UINT msg,
 		int i;
 		int rCount, sCount;
 		int *selectedArray;
-		
+
 		/* our counter within the array of selected items */
 		int itemNum;
-		
+
 		/* get the number of items selected in the list */
-		int numSelected = 
+		int numSelected =
 			SendDlgItemMessage(hwnd, 100, LB_GETSELCOUNT, 0, 0);
-		
+
 		/* none selected? that was silly */
 		if (numSelected == 0) {
 		    MessageBeep(0);
@@ -1565,27 +1565,27 @@ static int CALLBACK KeyListProc(HWND hwnd, UINT msg,
 		selectedArray = snewn(numSelected, int);
 		SendDlgItemMessage(hwnd, 100, LB_GETSELITEMS,
 				numSelected, (WPARAM)selectedArray);
-		
+
 		itemNum = numSelected - 1;
 		rCount = count234(rsakeys);
 		sCount = count234(ssh2keys);
-		
-		/* go through the non-rsakeys until we've covered them all, 
+
+		/* go through the non-rsakeys until we've covered them all,
 		 * and/or we're out of selected items to check. note that
 		 * we go *backwards*, to avoid complications from deleting
 		 * things hence altering the offset of subsequent items
 		 */
 	    for (i = sCount - 1; (itemNum >= 0) && (i >= 0); i--) {
 			skey = index234(ssh2keys, i);
-			
+
 			if (selectedArray[itemNum] == rCount + i) {
 				del234(ssh2keys, skey);
 				skey->alg->freekey(skey->data);
 				sfree(skey);
-			   	itemNum--; 
+			   	itemNum--;
 			}
 		}
-		
+
 		/* do the same for the rsa keys */
 		for (i = rCount - 1; (itemNum >= 0) && (i >= 0); i--) {
 			rkey = index234(rsakeys, i);
@@ -1598,7 +1598,7 @@ static int CALLBACK KeyListProc(HWND hwnd, UINT msg,
 			}
 		}
 
-		sfree(selectedArray); 
+		sfree(selectedArray);
 		keylist_update();
 	    }
 	    return 0;
@@ -1657,7 +1657,7 @@ static BOOL AddTrayIcon(HWND hwnd)
     res = Shell_NotifyIcon(NIM_ADD, &tnid);
 
     if (hicon) DestroyIcon(hicon);
-    
+
     return res;
 }
 
@@ -1781,7 +1781,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT message,
 	    AddTrayIcon(hwnd);
         }
         break;
-        
+
       case WM_SYSTRAY:
 	if (lParam == WM_RBUTTONUP) {
 	    POINT cursorpos;
@@ -1827,7 +1827,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT message,
 				       NULL, KeyListProc);
 		ShowWindow(keylist, SW_SHOWNORMAL);
 	    }
-	    /* 
+	    /*
 	     * Sometimes the window comes up minimised / hidden for
 	     * no obvious reason. Prevent this. This also brings it
 	     * to the front if it's already present (the user
@@ -1851,7 +1851,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT message,
 		aboutbox = CreateDialog(hinst, MAKEINTRESOURCE(213),
 					NULL, AboutProc);
 		ShowWindow(aboutbox, SW_SHOWNORMAL);
-		/* 
+		/*
 		 * Sometimes the window comes up minimised / hidden
 		 * for no obvious reason. Prevent this.
 		 */

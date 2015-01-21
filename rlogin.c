@@ -153,7 +153,7 @@ static void rlogin_startup(Rlogin rlogin, const char *ruser)
 
 /*
  * Called to set up the rlogin connection.
- * 
+ *
  * Returns an error message, or NULL on success.
  *
  * Also places the canonical host name into `realhost'. It must be
@@ -247,7 +247,7 @@ static const char *rlogin_init(void *frontend_handle, void **backend_handle,
         rlogin->prompt = new_prompts(rlogin->frontend);
         rlogin->prompt->to_server = TRUE;
         rlogin->prompt->name = dupstr("Rlogin login name");
-        add_prompt(rlogin->prompt, dupstr("rlogin username: "), TRUE); 
+        add_prompt(rlogin->prompt, dupstr("rlogin username: "), TRUE);
         ret = get_userpass_input(rlogin->prompt, NULL, 0);
         if (ret >= 0) {
             rlogin_startup(rlogin, rlogin->prompt->prompts[0]->result);

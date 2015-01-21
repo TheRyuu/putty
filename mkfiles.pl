@@ -1003,7 +1003,7 @@ if (defined $makefiles{'vstudio10'} || defined $makefiles{'vstudio12'}) {
 
             $projguids{$windows_project} = $guid =
                 &invent_guid("project:$progname");
-        
+
             print
                 "Project(\"{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}\") = \"$windows_project\", \"$windows_project\\$windows_project.vcxproj\", \"{$guid}\"\n" .
                 "EndProject\n";
@@ -1038,7 +1038,7 @@ if (defined $makefiles{'vstudio10'} || defined $makefiles{'vstudio12'}) {
             ($windows_project, $type) = split ",", $progname;
             create_vs_project(\%all_object_deps, $windows_project, $type, $projguids{$windows_project}, $toolsver);
         }
-    
+
         chdir $orig_dir;
     }
 

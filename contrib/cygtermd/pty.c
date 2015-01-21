@@ -38,7 +38,7 @@ void pty_preinit(void)
 	perror("grantpt");
 	exit(1);
     }
-    
+
     if (unlockpt(master) < 0) {
 	perror("unlockpt");
 	exit(1);
@@ -157,7 +157,7 @@ int run_program_in_pty(const struct shell_data *shdata,
 	 */
 	if (!program_args) {
             char *shell;
-            
+
 	    shell = getenv("SHELL");
             if (!shell) {
                 const char *login;

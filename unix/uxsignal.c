@@ -15,7 +15,7 @@
 void (*putty_signal(int sig, void (*func)(int)))(int) {
     struct sigaction sa;
     struct sigaction old;
-    
+
     sa.sa_handler = func;
     if(sigemptyset(&sa.sa_mask) < 0)
 	return SIG_ERR;

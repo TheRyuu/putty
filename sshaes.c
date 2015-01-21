@@ -1,6 +1,6 @@
 /*
  * aes.c - implementation of AES / Rijndael
- * 
+ *
  * AES is a flexible algorithm as regards endianness: it has no
  * inherent preference as to which way round you should form words
  * from the input byte stream. It talks endlessly of four-byte
@@ -10,7 +10,7 @@
  * working AES that read words big-endian, and another working one
  * that read them little-endian, just by computing a different set
  * of tables - with no speed drop.
- * 
+ *
  * It's therefore tempting to do just that, and remove the overhead
  * of GET_32BIT_MSB_FIRST() et al, allowing every system to use its
  * own endianness-native code; but I decided not to, partly for
@@ -18,7 +18,7 @@
  * allows you to encrypt a non-word-aligned block of memory (which
  * many systems would stop being able to do if I went the
  * endianness-dependent route).
- * 
+ *
  * This implementation reads and stores words big-endian, but
  * that's a minor implementation detail. By flipping the endianness
  * of everything in the E0..E3, D0..D3 tables, and substituting

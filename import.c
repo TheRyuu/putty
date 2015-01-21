@@ -132,9 +132,9 @@ void strip_crlf(char *str)
 
 /*
  * Read an ASN.1/BER identifier and length pair.
- * 
+ *
  * Flags are a combination of the #defines listed below.
- * 
+ *
  * Returns -1 if unsuccessful; otherwise returns the number of
  * bytes used out of the source data.
  */
@@ -533,7 +533,7 @@ struct ssh2_userkey *openssh_read(const Filename *filename, char *passphrase,
     if (key->encrypted) {
 	/*
 	 * Derive encryption key from passphrase and iv/salt:
-	 * 
+	 *
 	 *  - let block A equal MD5(passphrase || iv)
 	 *  - let block B equal MD5(A || passphrase || iv)
 	 *  - block C would be MD5(B || passphrase || iv) and so on
@@ -598,7 +598,7 @@ struct ssh2_userkey *openssh_read(const Filename *filename, char *passphrase,
      *    SEQUENCE, but beneath is an INTEGER 1, OCTET STRING priv
      *    EXPLICIT [0] OID curve, EXPLICIT [1] BIT STRING pubPoint
      */
-    
+
     p = key->keyblob;
 
     /* Expect the SEQUENCE header. Take its absence as a failure to
@@ -1133,7 +1133,7 @@ int openssh_write(const Filename *filename, struct ssh2_userkey *key,
 	/*
 	 * Invent an iv. Then derive encryption key from passphrase
 	 * and iv/salt:
-	 * 
+	 *
 	 *  - let block A equal MD5(passphrase || iv)
 	 *  - let block B equal MD5(A || passphrase || iv)
 	 *  - block C would be MD5(B || passphrase || iv) and so on
@@ -1215,26 +1215,26 @@ int openssh_write(const Filename *filename, struct ssh2_userkey *key,
  * except that mpints are a bit different: they're more like the
  * old SSH-1 mpint. You have a 32-bit bit count N, followed by
  * (N+7)/8 bytes of data.
- * 
+ *
  * So. The blob contains:
- * 
+ *
  *  - uint32 0x3f6ff9eb       (magic number)
  *  - uint32 size             (total blob size)
  *  - string key-type         (see below)
  *  - string cipher-type      (tells you if key is encrypted)
  *  - string encrypted-blob
- * 
+ *
  * (The first size field includes the size field itself and the
  * magic number before it. All other size fields are ordinary SSH-2
  * strings, so the size field indicates how much data is to
  * _follow_.)
- * 
+ *
  * The encrypted blob, once decrypted, contains a single string
  * which in turn contains the payload. (This allows padding to be
  * added after that string while still making it clear where the
  * real payload ends. Also it probably makes for a reasonable
  * decryption check.)
- * 
+ *
  * The payload blob, for an RSA key, contains:
  *  - mpint e
  *  - mpint d
@@ -1242,7 +1242,7 @@ int openssh_write(const Filename *filename, struct ssh2_userkey *key,
  *  - mpint u  (presumably inverse of p mod q)
  *  - mpint p  (p is the smaller prime)
  *  - mpint q  (q is the larger)
- * 
+ *
  * For a DSA key, the payload blob contains:
  *  - uint32 0
  *  - mpint p
@@ -1250,30 +1250,30 @@ int openssh_write(const Filename *filename, struct ssh2_userkey *key,
  *  - mpint q
  *  - mpint y
  *  - mpint x
- * 
+ *
  * Alternatively, if the parameters are `predefined', that
  * (0,p,g,q) sequence can be replaced by a uint32 1 and a string
  * containing some predefined parameter specification. *shudder*,
  * but I doubt we'll encounter this in real life.
- * 
+ *
  * The key type strings are ghastly. The RSA key I looked at had a
  * type string of
- * 
+ *
  *   `if-modn{sign{rsa-pkcs1-sha1},encrypt{rsa-pkcs1v2-oaep}}'
- * 
+ *
  * and the DSA key wasn't much better:
- * 
+ *
  *   `dl-modp{sign{dsa-nist-sha1},dh{plain}}'
- * 
+ *
  * It isn't clear that these will always be the same. I think it
  * might be wise just to look at the `if-modn{sign{rsa' and
  * `dl-modp{sign{dsa' prefixes.
- * 
+ *
  * Finally, the encryption. The cipher-type string appears to be
  * either `none' or `3des-cbc'. Looks as if this is SSH-2-style
  * 3des-cbc (i.e. outer cbc rather than inner). The key is created
  * from the passphrase by means of yet another hashing faff:
- * 
+ *
  *  - first 16 bytes are MD5(passphrase)
  *  - next 16 bytes are MD5(passphrase || first 16 bytes)
  *  - if there were more, they'd be MD5(passphrase || first 32),
@@ -1627,7 +1627,7 @@ struct ssh2_userkey *sshcom_read(const Filename *filename, char *passphrase,
     if (encrypted) {
 	/*
 	 * Derive encryption key from passphrase and iv/salt:
-	 * 
+	 *
 	 *  - let block A equal MD5(passphrase)
 	 *  - let block B equal MD5(passphrase || A)
 	 *  - block C would be MD5(passphrase || A || B) and so on
@@ -1917,7 +1917,7 @@ int sshcom_write(const Filename *filename, struct ssh2_userkey *key,
     if (passphrase) {
 	/*
 	 * Derive encryption key from passphrase and iv/salt:
-	 * 
+	 *
 	 *  - let block A equal MD5(passphrase)
 	 *  - let block B equal MD5(passphrase || A)
 	 *  - block C would be MD5(passphrase || A || B) and so on

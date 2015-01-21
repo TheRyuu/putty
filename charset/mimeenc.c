@@ -1,7 +1,7 @@
 /*
  * mimeenc.c - translate our internal character set codes to and
  * from MIME standard character-set names.
- * 
+ *
  */
 
 #include <ctype.h>
@@ -14,9 +14,9 @@ static const struct {
 } mimeencs[] = {
     /*
      * These names are taken from
-     * 
+     *
      *   http://www.iana.org/assignments/character-sets
-     * 
+     *
      * Where multiple encoding names map to the same encoding id
      * (such as the variety of aliases for ISO-8859-1), the first
      * is considered canonical and will be returned when

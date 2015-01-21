@@ -356,7 +356,7 @@ void timer_change_notify(long next)
 	osxsel_process_results();
 
     [super sendEvent:ev];
-}    
+}
 @end
 
 /* ----------------------------------------------------------------------

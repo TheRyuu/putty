@@ -60,7 +60,7 @@ struct sbcs_data {
      * position in this table, you branch according to whether
      * sbcs2ucs[ucs2sbcs[X]] is less than, greater than, or equal
      * to U.
-     * 
+     *
      * Note that since there may be fewer than 256 valid byte
      * values in a particular SBCS, we must supply the length of
      * this table as well as the contents.

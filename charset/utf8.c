@@ -24,23 +24,23 @@ void read_utf8(charset_spec const *charset, long int input_chr,
 
     /*
      * For reading UTF-8, the `state' word contains:
-     * 
+     *
      *  - in bits 29-31, the number of bytes expected to be in the
      *    current multibyte character (which we can tell instantly
      *    from the first byte, of course).
-     * 
+     *
      *  - in bits 26-28, the number of bytes _seen so far_ in the
      *    current multibyte character.
-     * 
+     *
      *  - in the remainder of the word, the current value of the
      *    character, which is shifted upwards by 6 bits to
      *    accommodate each new byte.
-     * 
+     *
      * As required, the state is zero when we are not in the middle
      * of a multibyte character at all.
-     * 
+     *
      * For example, when reading E9 8D 8B, starting at state=0:
-     * 
+     *
      *  - after E9, the state is 0x64000009
      *  - after 8D, the state is 0x6800024d
      *  - after 8B, the state conceptually becomes 0x6c00934b, at

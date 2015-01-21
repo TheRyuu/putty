@@ -523,59 +523,59 @@ Bignum *dss_gen_k(const char *id_string, Bignum modulus, Bignum private_key,
 {
     /*
      * The basic DSS signing algorithm is:
-     * 
+     *
      *  - invent a random k between 1 and q-1 (exclusive).
      *  - Compute r = (g^k mod p) mod q.
      *  - Compute s = k^-1 * (hash + x*r) mod q.
-     * 
+     *
      * This has the dangerous properties that:
-     * 
+     *
      *  - if an attacker in possession of the public key _and_ the
      *    signature (for example, the host you just authenticated
      *    to) can guess your k, he can reverse the computation of s
      *    and work out x = r^-1 * (s*k - hash) mod q. That is, he
      *    can deduce the private half of your key, and masquerade
      *    as you for as long as the key is still valid.
-     * 
+     *
      *  - since r is a function purely of k and the public key, if
      *    the attacker only has a _range of possibilities_ for k
      *    it's easy for him to work through them all and check each
      *    one against r; he'll never be unsure of whether he's got
      *    the right one.
-     * 
+     *
      *  - if you ever sign two different hashes with the same k, it
      *    will be immediately obvious because the two signatures
      *    will have the same r, and moreover an attacker in
      *    possession of both signatures (and the public key of
      *    course) can compute k = (hash1-hash2) * (s1-s2)^-1 mod q,
      *    and from there deduce x as before.
-     * 
+     *
      *  - the Bleichenbacher attack on DSA makes use of methods of
      *    generating k which are significantly non-uniformly
      *    distributed; in particular, generating a 160-bit random
      *    number and reducing it mod q is right out.
-     * 
+     *
      * For this reason we must be pretty careful about how we
      * generate our k. Since this code runs on Windows, with no
      * particularly good system entropy sources, we can't trust our
      * RNG itself to produce properly unpredictable data. Hence, we
      * use a totally different scheme instead.
-     * 
+     *
      * What we do is to take a SHA-512 (_big_) hash of the private
      * key x, and then feed this into another SHA-512 hash that
      * also includes the message hash being signed. That is:
-     * 
+     *
      *   proto_k = SHA512 ( SHA512(x) || SHA160(message) )
-     * 
+     *
      * This number is 512 bits long, so reducing it mod q won't be
      * noticeably non-uniform. So
-     * 
+     *
      *   k = proto_k mod q
-     * 
+     *
      * This has the interesting property that it's _deterministic_:
      * signing the same hash twice with the same key yields the
      * same signature.
-     * 
+     *
      * Despite this determinism, it's still not predictable to an
      * attacker, because in order to repeat the SHA-512
      * construction that created it, the attacker would have to
@@ -586,7 +586,7 @@ Bignum *dss_gen_k(const char *id_string, Bignum modulus, Bignum private_key,
      * Reuse of k is left to chance; all it does is prevent
      * _excessively high_ chances of reuse of k due to entropy
      * problems.)
-     * 
+     *
      * Thanks to Colin Plumb for the general idea of using x to
      * ensure k is hard to guess, and to the Cambridge University
      * Computer Security Group for helping to argue out all the
@@ -670,10 +670,10 @@ static unsigned char *dss_sign(void *key, char *data, int datalen, int *siglen)
 
     /*
      * Signature blob is
-     * 
+     *
      *   string  "ssh-dss"
      *   string  two 20-byte numbers r and s, end to end
-     * 
+     *
      * i.e. 4+7 + 4+40 bytes.
      */
     nbytes = 4 + 7 + 4 + 40;

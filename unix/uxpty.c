@@ -154,12 +154,12 @@ static tree234 *ptys_by_pid = NULL;
  * allocated a pty structure, which we must then return from
  * pty_init() rather than allocating a new one. Here we store that
  * structure between allocation and use.
- * 
+ *
  * Note that although most of this module is entirely capable of
  * handling multiple ptys in a single process, pty_pre_init() is
  * fundamentally _dependent_ on there being at most one pty per
  * process, so the normal static-data constraints don't apply.
- * 
+ *
  * Likewise, since utmp is only used via pty_pre_init, it too must
  * be single-instance, so we can declare utmp-related variables
  * here.
@@ -361,7 +361,7 @@ static void pty_open_master(Pty pty)
 	perror("grantpt");
 	exit(1);
     }
-    
+
     if (unlockpt(pty->master_fd) < 0) {
 	perror("unlockpt");
 	exit(1);
@@ -444,7 +444,7 @@ void pty_pre_init(void)
 
             dlen = 0;
             while (1) {
-	    
+
                 ret = read(pipefd[0], buffer, lenof(buffer));
                 if (ret <= 0) {
                     cleanup_utmp();
@@ -699,7 +699,7 @@ static void pty_uxsel_setup(Pty pty)
 
 /*
  * Called to set up the pty.
- * 
+ *
  * Returns an error message, or NULL on success.
  *
  * Also places the canonical host name into `realhost'. It must be

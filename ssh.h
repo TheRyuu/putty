@@ -307,7 +307,7 @@ struct ssh_hash {
     void (*final)(void *, unsigned char *); /* also frees context */
     int hlen; /* output length in bytes */
     char *text_name;
-};   
+};
 
 struct ssh_kex {
     char *name, *groupname;
@@ -408,7 +408,7 @@ void aes_ssh2_encrypt_blk(void *handle, unsigned char *blk, int len);
 void aes_ssh2_decrypt_blk(void *handle, unsigned char *blk, int len);
 
 /*
- * PuTTY version number formatted as an SSH version string. 
+ * PuTTY version number formatted as an SSH version string.
  */
 extern char sshver[];
 

@@ -66,7 +66,7 @@ BOOL request_file(filereq *state, OPENFILENAME *of, int preserve, int save)
 	    /* Didn't work, oh well. */
 	    state->cwd[0] = '\0';
     }
-    
+
     /* Restore process CWD */
     if (preserve)
 	/* If it fails, there's not much we can do. */
@@ -113,7 +113,7 @@ static VOID CALLBACK message_box_help_callback(LPHELPINFO lpHelpInfo)
 int message_box(LPCTSTR text, LPCTSTR caption, DWORD style, DWORD helpctxid)
 {
     MSGBOXPARAMS mbox;
-    
+
     /*
      * We use MessageBoxIndirect() because it allows us to specify a
      * callback function for the Help button.
@@ -176,9 +176,9 @@ char *GetDlgItemText_alloc(HWND hwnd, int id)
  * broken apart by the C library, will have their command lines
  * processed in the same way as the GUI utilities which get a whole
  * command line and must call this function).
- * 
+ *
  * Does not modify the input command line.
- * 
+ *
  * The final parameter (argstart) is used to return a second array
  * of char * pointers, the same length as argv, each one pointing
  * at the start of the corresponding element of argv in the
@@ -236,11 +236,11 @@ void split_into_argv(char *cmdline, int *argc, char ***argv,
      *    quotes (down the left), and indicate how many backslashes
      *    are output, how many quotes are output, and whether a
      *    quoted segment is open at the end of the sequence:
-     * 
+     *
      *                      backslashes
-     * 
+     *
      *               0         1      2      3      4
-     * 
+     *
      *         0   0,0,y  |  1,0,y  2,0,y  3,0,y  4,0,y
      *            --------+-----------------------------
      *         1   0,0,n  |  0,1,y  1,0,n  1,1,y  2,0,n
@@ -254,18 +254,18 @@ void split_into_argv(char *cmdline, int *argc, char ***argv,
      *         9   0,3,y  |  0,4,n  1,3,y  1,4,n  2,3,y
      *        10   0,3,n  |  0,4,y  1,3,n  1,4,y  2,3,n
      *        11   0,4,n  |  0,4,n  1,4,n  1,4,n  2,4,n
-     * 
-     * 
+     *
+     *
      *      [Test fragment was of the form "a\\\"""b c" d.]
-     * 
+     *
      * There is very weird mod-3 behaviour going on here in the
      * number of quotes, and it even applies when there aren't any
      * backslashes! How ghastly.
-     * 
+     *
      * With a bit of thought, this extremely odd diagram suddenly
      * coalesced itself into a coherent, if still ghastly, model of
      * how things work:
-     * 
+     *
      *  - As before, backslashes are only special when one or more
      *    of them appear contiguously before at least one double
      *    quote. In this situation the backslashes do exactly what
@@ -274,17 +274,17 @@ void split_into_argv(char *cmdline, int *argc, char ***argv,
      *    even) or (n-1)/2 literal backslashes and a literal quote
      *    (if n is odd). In the latter case the double quote
      *    character right after the backslashes is used up.
-     * 
+     *
      *  - After that, any remaining double quotes are processed. A
      *    string of contiguous unescaped double quotes has a mod-3
      *    behaviour:
-     * 
+     *
      *     * inside a quoted segment, a quote ends the segment.
      *     * _immediately_ after ending a quoted segment, a quote
      *       simply produces a literal quote.
      *     * otherwise, outside a quoted segment, a quote begins a
      *       quoted segment.
-     * 
+     *
      *    So, for example, if we started inside a quoted segment
      *    then two contiguous quotes would close the segment and
      *    produce a literal quote; three would close the segment,
@@ -498,17 +498,17 @@ int main(int argc, char **argv)
     if (argc > 1) {
 	/*
 	 * Generation of tests.
-	 * 
+	 *
 	 * Given `-splat <args>', we print out a C-style
 	 * representation of each argument (in the form "a", "b",
 	 * NULL), backslash-escaping each backslash and double
 	 * quote.
-	 * 
+	 *
 	 * Given `-split <string>', we first doctor `string' by
 	 * turning forward slashes into backslashes, single quotes
 	 * into double quotes and underscores into spaces; and then
 	 * we feed the resulting string to ourself with `-splat'.
-	 * 
+	 *
 	 * Given `-generate', we concoct a variety of fun test
 	 * cases, encode them in quote-safe form (mapping \, " and
 	 * space to /, ' and _ respectively) and feed each one to

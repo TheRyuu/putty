@@ -11,13 +11,13 @@
  * The unofficial Cocoa FAQ at
  *
  *   http://www.alastairs-place.net/cocoa/faq.txt
- * 
+ *
  * says that Cocoa has the native ability to be given an fd and
  * tell you when it becomes readable, but cannot tell you when it
  * becomes _writable_. This is unacceptable to PuTTY, which depends
  * for correct functioning on being told both. Therefore, I can't
  * use the Cocoa native mechanism.
- * 
+ *
  * Instead, I'm going to resort to threads. I start a second thread
  * whose job is to do selects. At the termination of every select,
  * it posts a Cocoa event into the main thread's event queue, so
@@ -31,43 +31,43 @@
 
 /*
  * In more detail, the select thread must:
- * 
+ *
  *  - start off by listening to _just_ the pipe, waiting to be told
  *    to begin a select.
- * 
+ *
  *  - when it receives the `start' command, it should read the
  *    shared uxsel data (which is protected by a mutex), set up its
  *    select, and begin it.
- * 
+ *
  *  - when the select terminates, it should write the results
  *    (perhaps minus the inter-thread pipe if it's there) into
  *    shared memory and dispatch a GUI event to let the main thread
  *    know.
- * 
+ *
  *  - the main thread will then think about it, do some processing,
  *    and _then_ send a command saying `now restart select'. Before
  *    sending that command it might easily have tinkered with the
  *    uxsel structures, which is why it waited before sending it.
- * 
+ *
  *  - EOF on the inter-thread pipe, of course, means the process
  *    has finished completely, so the select thread terminates.
- * 
+ *
  *  - The main thread may wish to adjust the uxsel settings in the
  *    middle of a select. In this situation it first writes the new
  *    data to the shared memory area, then notifies the select
  *    thread by writing to the inter-thread pipe.
- * 
+ *
  * So the upshot is that the sequence of operations performed in
  * the select thread must be:
- * 
+ *
  *  - read a byte from the pipe (which may block)
- * 
+ *
  *  - read the shared uxsel data and perform a select
- * 
+ *
  *  - notify the main thread of interesting select results (if any)
- * 
+ *
  *  - loop round again from the top.
- * 
+ *
  * This is sufficient. Notifying the select thread asynchronously
  * by writing to the pipe will cause its select to terminate and
  * another to begin immediately without blocking. If the select
@@ -148,13 +148,13 @@ static int inhibit_start_select;
 
 	/*
 	 * Write the select results to shared data.
-	 * 
+	 *
 	 * I _think_ we don't need this data to be lock-protected:
 	 * it won't be read by the main thread until after we send
 	 * a message indicating that we've finished writing it, and
 	 * we won't start another select (hence potentially writing
 	 * it again) until the main thread notifies us in return.
-	 * 
+	 *
 	 * However, I'm scared of multithreading and not totally
 	 * convinced of my reasoning, so I'm going to lock it
 	 * anyway.
@@ -267,7 +267,7 @@ void uxsel_input_remove(int id)
  * Function called in the main thread to process results. It will
  * have to read the output fd_sets, go through them, call back to
  * uxsel with the results, and then write to the inter-thread pipe.
- * 
+ *
  * This function will have to be called from an event handler in
  * osxmain.m, which will therefore necessarily contain a small part
  * of this mechanism (along with calling osxsel_init).

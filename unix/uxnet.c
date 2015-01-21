@@ -31,7 +31,7 @@
 # define X11_UNIX_PATH "/tmp/.X11-unix/X"
 #endif
 
-/* 
+/*
  * Access to sockaddr types without breaking C strict aliasing rules.
  */
 union sockaddr_union {
@@ -317,7 +317,7 @@ static int sk_nextaddr(SockAddr addr, SockAddrStep *step)
     } else {
 	return FALSE;
     }
-#endif    
+#endif
 }
 
 void sk_getaddr(SockAddr addr, char *buf, int buflen)
@@ -648,14 +648,14 @@ static int try_connect(Actual_Socket sock)
 		if (err != EADDRINUSE) /* failed, for a bad reason */
 		  break;
 	    }
-	    
+
 	    if (localport == 0)
 	      break;		       /* we're only looping once */
 	    localport--;
 	    if (localport == 0)
 	      break;		       /* we might have got to the end */
 	}
-	
+
 	if (err)
 	    goto ret;
     }

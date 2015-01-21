@@ -157,7 +157,7 @@ void logfopen(void *handle)
     /* substitute special codes in file name */
     if (ctx->currlogfilename)
         filename_free(ctx->currlogfilename);
-    ctx->currlogfilename = 
+    ctx->currlogfilename =
         xlatlognam(conf_get_filename(ctx->conf, CONF_logfilename),
                    conf_get_str(ctx->conf, CONF_host), &tm);
 

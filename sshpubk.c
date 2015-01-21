@@ -419,7 +419,7 @@ int saversakey(const Filename *filename, struct RSAKey *key, char *passphrase)
  *
  *    mpint  x                  (the private key parameter)
  *  [ string hash   20-byte hash of mpints p || q || g   only in old format ]
- * 
+ *
  * Finally, there is a line saying "Private-MAC: " plus a hex
  * representation of a HMAC-SHA-1 of:
  *
@@ -430,9 +430,9 @@ int saversakey(const Filename *filename, struct RSAKey *key, char *passphrase)
  *    string  private-plaintext (the plaintext version of the
  *                               private part, including the final
  *                               padding)
- * 
+ *
  * The key to the MAC is itself a SHA-1 hash of:
- * 
+ *
  *    data    "putty-private-key-file-mac-key"
  *    data    passphrase
  *

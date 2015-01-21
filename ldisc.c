@@ -145,7 +145,7 @@ void ldisc_send(void *handle, char *buf, int len, int interactive)
     /*
      * Notify the front end that something was pressed, in case
      * it's depending on finding out (e.g. keypress termination for
-     * Close On Exit). 
+     * Close On Exit).
      */
     frontend_keypress(ldisc->frontend);
 
@@ -263,7 +263,7 @@ void ldisc_send(void *handle, char *buf, int len, int interactive)
 		 * allows ordinary ^M^J to do the same thing as
 		 * magic-^M when in Raw protocol. The line `case
 		 * KCTRL('M'):' is _inside_ the if block. Thus:
-		 * 
+		 *
 		 *  - receiving regular ^M goes straight to the
 		 *    default clause and inserts as a literal ^M.
 		 *  - receiving regular ^J _not_ directly after a

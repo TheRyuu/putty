@@ -65,7 +65,7 @@ int proxy_socks5_handlechap (Proxy_Socket p)
 	     * we're waiting for the value's data, we might not want
 	     * to read 2 bytes.
 	     */
- 
+
 	    if (bufchain_size(&p->pending_input_data) < 2)
 		return 1;	       /* not got anything yet */
 
@@ -76,7 +76,7 @@ int proxy_socks5_handlechap (Proxy_Socket p)
 
 	if (p->chap_num_attributes == 0) {
 	    /* If there are no attributes, this is our first msg
-	     * with the server, where we negotiate version and 
+	     * with the server, where we negotiate version and
 	     * number of attributes
 	     */
 	    if (data[0] != 0x01) {
@@ -185,7 +185,7 @@ int proxy_socks5_selectchap(Proxy_Socket p)
 	p->chap_current_datalen = 0;
 
 	p->state = 8;
-    } else 
+    } else
 	plug_closing(p->plug, "Proxy error: Server chose "
 		     "CHAP authentication but we didn't offer it!",
 		 PROXY_ERROR_GENERAL, 0);

@@ -17,7 +17,7 @@
  *
  * Ariel Futoransky <futo@core-sdi.com>
  * <http://www.core-sdi.com>
- * 
+ *
  * Modified for use in PuTTY by Simon Tatham
  */
 

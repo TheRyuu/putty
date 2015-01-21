@@ -1,7 +1,7 @@
 /*
  * xenc.c - translate our internal character set codes to and from
  * X11 character encoding names.
- * 
+ *
  */
 
 #include <ctype.h>
@@ -15,9 +15,9 @@ static const struct {
     /*
      * Officially registered encoding names. This list is derived
      * from the font encodings section of
-     * 
+     *
      *   http://ftp.x.org/pub/DOCS/registry
-     * 
+     *
      * Where multiple encoding names map to the same encoding id
      * (such as iso8859-15 and fcd8859-15), the first is considered
      * canonical and will be returned when translating the id to a

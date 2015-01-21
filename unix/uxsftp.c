@@ -144,7 +144,7 @@ RFile *open_existing_file(char *name, uint64 *size,
 	if (size)
 	    *size = uint64_make((statbuf.st_size >> 16) >> 16,
 				statbuf.st_size);
-	 	
+
 	if (mtime)
 	    *mtime = statbuf.st_mtime;
 
@@ -266,7 +266,7 @@ int seek_file(WFile *f, uint64 offset, int whence)
 {
     off_t fileofft;
     int lseek_whence;
-    
+
     fileofft = (((off_t) offset.hi << 16) << 16) + offset.lo;
 
     switch (whence) {

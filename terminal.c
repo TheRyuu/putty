@@ -146,7 +146,7 @@ static void unlineptr(termline *line)
 /*
  * Diagnostic function: verify that a termline has a correct
  * combining character structure.
- * 
+ *
  * This is a performance-intensive check, so it's no longer enabled
  * by default.
  */
@@ -394,7 +394,7 @@ static void makerle(struct buf *b, termline *ldata,
 	    /*
 	     * This literal precisely matches the previous one.
 	     * Turn it into a run if it's worthwhile.
-	     * 
+	     *
 	     * With one-byte literals, it costs us two bytes to
 	     * encode a run, plus another byte to write the header
 	     * to resume normal output; so a three-element run is
@@ -516,20 +516,20 @@ static void makeliteral_chr(struct buf *b, termchar *c, unsigned long *state)
      * day use values 0x80000000-0xFFFFFFFF for interesting
      * purposes, so unlike UTF-8 I need a full 32-bit range.
      * Accordingly, here is my encoding:
-     * 
+     *
      * 00000000-0000007F: 0xxxxxxx (but see below)
      * 00000080-00003FFF: 10xxxxxx xxxxxxxx
      * 00004000-001FFFFF: 110xxxxx xxxxxxxx xxxxxxxx
      * 00200000-0FFFFFFF: 1110xxxx xxxxxxxx xxxxxxxx xxxxxxxx
      * 10000000-FFFFFFFF: 11110ZZZ xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
-     * 
+     *
      * (`Z' is like `x' but is always going to be zero since the
      * values I'm encoding don't go above 2^32. In principle the
      * five-byte form of the encoding could extend to 2^35, and
      * there could be six-, seven-, eight- and nine-byte forms as
      * well to allow up to 64-bit values to be encoded. But that's
      * completely unnecessary for these purposes!)
-     * 
+     *
      * The encoding as written above would be very simple, except
      * that 7-bit ASCII can occur in several different ways in the
      * terminal data; sometimes it crops up in the D800 page
@@ -571,7 +571,7 @@ static void makeliteral_attr(struct buf *b, termchar *c, unsigned long *state)
      * store a two-byte value with the top bit clear (indicating
      * just that value), or a four-byte value with the top bit set
      * (indicating the same value with its top bit clear).
-     * 
+     *
      * However, first I permute the bits of the attribute value, so
      * that the eight bits of colour (four in each of fg and bg)
      * which are never non-zero unless xterm 256-colour mode is in
@@ -613,7 +613,7 @@ static void makeliteral_cc(struct buf *b, termchar *c, unsigned long *state)
      * chars using makeliteral_chr, and terminate with a \0
      * character (which I know won't come up as a combining char
      * itself).
-     * 
+     *
      * I don't use the stateful encoding in makeliteral_chr.
      */
     unsigned long zstate;
@@ -669,13 +669,13 @@ static unsigned char *compressline(termline *ldata)
      * Now we store a sequence of separate run-length encoded
      * fragments, each containing exactly as many symbols as there
      * are columns in the ldata.
-     * 
+     *
      * All of these have a common basic format:
-     * 
+     *
      *  - a byte 00-7F indicates that X+1 literals follow it
      * 	- a byte 80-FF indicates that a single literal follows it
      * 	  and expects to be repeated (X-0x80)+2 times.
-     * 
+     *
      * The format of the `literals' varies between the fragments.
      */
     makerle(b, ldata, makeliteral_chr);
@@ -685,7 +685,7 @@ static unsigned char *compressline(termline *ldata)
     /*
      * Diagnostics: ensure that the compressed data really does
      * decompress to the right thing.
-     * 
+     *
      * This is a bit performance-heavy for production code.
      */
 #ifdef TERM_CC_DIAGS
@@ -921,7 +921,7 @@ static void resizeline(Terminal *term, termline *line, int cols)
 	/*
 	 * This line is the wrong length, which probably means it
 	 * hasn't been accessed since a resize. Resize it now.
-	 * 
+	 *
 	 * First, go through all the characters that will be thrown
 	 * out in the resize (if we're shrinking the line) and
 	 * return their cc lists to the cc free list.
@@ -1739,7 +1739,7 @@ void term_size(Terminal *term, int newrows, int newcols, int newsavelines)
      * lines around within our data structures, because lineptr()
      * will take care of resizing each individual line if
      * necessary. So:
-     * 
+     *
      *  - If the new screen is longer, we shunt lines in from temporary
      *    scrollback if possible, otherwise we add new blank lines at
      *    the bottom.
@@ -1748,7 +1748,7 @@ void term_size(Terminal *term, int newrows, int newcols, int newsavelines)
      *    the bottom if possible, otherwise shunt lines above the cursor
      *    to scrollback if possible, otherwise delete lines below the
      *    cursor.
-     * 
+     *
      *  - Then, if the new scrollback length is less than the
      *    amount of scrollback we actually have, we must throw some
      *    away.
@@ -1905,7 +1905,7 @@ void term_provide_resize_fn(Terminal *term,
 /* Find the bottom line on the screen that has any content.
  * If only the top line has content, returns 0.
  * If no lines have content, return -1.
- */ 
+ */
 static int find_last_nonempty_line(Terminal * term, tree234 * screen)
 {
     int i;
@@ -2125,7 +2125,7 @@ static void scroll(Terminal *term, int topline, int botline, int lines, int sb)
 		 * scroll, at least until their viewpoint hits the
 		 * top end of the scrollback buffer, at which point
 		 * we don't have the choice any more.
-		 * 
+		 *
 		 * Thanks to Jan Holmen Holsten for the idea and
 		 * initial implementation.
 		 */
@@ -2144,7 +2144,7 @@ static void scroll(Terminal *term, int topline, int botline, int lines, int sb)
 	     * of course, if the line _hasn't_ moved into the
 	     * scrollback then we don't do this, and cut them off
 	     * at the top of the scroll region.
-	     * 
+	     *
 	     * This applies to selstart and selend (for an existing
 	     * selection), and also selanchor (for one being
 	     * selected as we speak).
@@ -2197,7 +2197,7 @@ static void save_scroll(Terminal *term, int topline, int botline, int lines)
 {
     struct scrollregion *newscroll;
     if (term->scrolltail &&
-	term->scrolltail->topline == topline && 
+	term->scrolltail->topline == topline &&
 	term->scrolltail->botline == botline) {
 	term->scrolltail->lines += lines;
     } else {
@@ -2324,17 +2324,17 @@ static void save_cursor(Terminal *term, int save)
  * only part of a line of text. It is used to mark the boundary
  * between two character positions, and it indicates that some sort
  * of effect is going to happen on only one side of that boundary.
- * 
+ *
  * The effect of this function is to check whether a CJK
  * double-width character is straddling the boundary, and to remove
  * it and replace it with two spaces if so. (Of course, one or
  * other of those spaces is then likely to be replaced with
  * something else again, as a result of whatever happens next.)
- * 
+ *
  * Also, if the boundary is at the right-hand _edge_ of the screen,
  * it implies something deliberate is being done to the rightmost
  * column position; hence we must clear LATTR_WRAPPED2.
- * 
+ *
  * The input to the function is the coordinates of the _second_
  * character of the pair.
  */
@@ -2809,7 +2809,7 @@ static void term_out(Terminal *term)
 		  case 0:
 		    if (c < 0x80) {
 			/* UTF-8 must be stateless so we ignore iso2022. */
-			if (term->ucsdata->unitab_ctrl[c] != 0xFF) 
+			if (term->ucsdata->unitab_ctrl[c] != 0xFF)
 			     c = term->ucsdata->unitab_ctrl[c];
 			else c = ((unsigned char)c) | CSET_ASCII;
 			break;
@@ -2867,7 +2867,7 @@ static void term_out(Terminal *term)
 			c = 0xFFFD;
 
 		    /* The UTF-16 surrogates are not nice either. */
-		    /*       The standard give the option of decoding these: 
+		    /*       The standard give the option of decoding these:
 		     *       I don't want to! */
 		    if (c >= 0xD800 && c < 0xE000)
 			c = UCSERR;
@@ -2890,14 +2890,14 @@ static void term_out(Terminal *term)
 		    break;
 	    }
 	    /* Are we in the nasty ACS mode? Note: no sco in utf mode. */
-	    else if(term->sco_acs && 
+	    else if(term->sco_acs &&
 		    (c!='\033' && c!='\012' && c!='\015' && c!='\b'))
 	    {
 	       if (term->sco_acs == 2) c |= 0x80;
 	       c |= CSET_SCOACS;
 	    } else {
 		switch (term->cset_attr[term->cset]) {
-		    /* 
+		    /*
 		     * Linedraw characters are different from 'ESC ( B'
 		     * only for a small range. For ones outside that
 		     * range, make sure we use the same font as well as
@@ -2930,7 +2930,7 @@ static void term_out(Terminal *term)
 	}
 
 	/*
-	 * How about C1 controls? 
+	 * How about C1 controls?
 	 * Explicitly ignore SCI (0x9a), which we don't translate to DECID.
 	 */
 	if ((c & -32) == 0x80 && term->termstate < DO_CTRLS &&
@@ -2961,7 +2961,7 @@ static void term_out(Terminal *term)
 	if ((c & ~0x1F) == 0 && term->termstate < DO_CTRLS) {
 	    switch (c) {
 	      case '\005':	       /* ENQ: terminal type query */
-		/* 
+		/*
 		 * Strictly speaking this is VT100 but a VT100 defaults to
 		 * no response. Other terminals respond at their option.
 		 *
@@ -3447,10 +3447,10 @@ static void term_out(Terminal *term)
 		    if (!term->no_remote_charset)
 			term->cset_attr[0] = CSET_LINEDRW;
 		    break;
-		  case ANSI('U', '('): 
+		  case ANSI('U', '('):
 		    compatibility(OTHER);
 		    if (!term->no_remote_charset)
-			term->cset_attr[0] = CSET_SCOACS; 
+			term->cset_attr[0] = CSET_SCOACS;
 		    break;
 		  /* G1D4: G1-designate 94-set */
 		  case ANSI('A', ')'):
@@ -3468,10 +3468,10 @@ static void term_out(Terminal *term)
 		    if (!term->no_remote_charset)
 			term->cset_attr[1] = CSET_LINEDRW;
 		    break;
-		  case ANSI('U', ')'): 
+		  case ANSI('U', ')'):
 		    compatibility(OTHER);
 		    if (!term->no_remote_charset)
-			term->cset_attr[1] = CSET_SCOACS; 
+			term->cset_attr[1] = CSET_SCOACS;
 		    break;
 		  /* DOCS: Designate other coding system */
 		  case ANSI('8', '%'):	/* Old Linux code */
@@ -3534,7 +3534,7 @@ static void term_out(Terminal *term)
 		      case 'a':		/* HPR: move right N cols */
 			compatibility(ANSI);
 			/* FALLTHROUGH */
-		      case 'C':		/* CUF: Cursor right */ 
+		      case 'C':		/* CUF: Cursor right */
 			move(term, term->curs.x + def(term->esc_args[0], 1),
 			     term->curs.y, 1);
 			seen_disp_event(term);
@@ -3669,7 +3669,7 @@ static void term_out(Terminal *term)
 			{
 			    char *printer;
 			    if (term->esc_nargs != 1) break;
-			    if (term->esc_args[0] == 5 && 
+			    if (term->esc_args[0] == 5 &&
 				(printer = conf_get_str(term->conf,
 							CONF_printer))[0]) {
 				term->printing = TRUE;
@@ -3681,7 +3681,7 @@ static void term_out(Terminal *term)
 				term_print_finish(term);
 			    }
 			}
-			break;			
+			break;
 		      case 'l':       /* RM: toggle modes to low */
 		      case ANSI_QUE('l'):
 			compatibility(VT100);
@@ -3739,7 +3739,7 @@ static void term_out(Terminal *term)
 			break;
 		      case 'm':       /* SGR: set graphics rendition */
 			{
-			    /* 
+			    /*
 			     * A VT100 without the AVO only had one
 			     * attribute, either underline or
 			     * reverse video depending on the
@@ -3922,7 +3922,7 @@ static void term_out(Terminal *term)
 			/*
 			 * VT340/VT420 sequence DECSLPP, DEC only allows values
 			 *  24/25/36/48/72/144 other emulators (eg dtterm) use
-			 * illegal values (eg first arg 1..9) for window changing 
+			 * illegal values (eg first arg 1..9) for window changing
 			 * and reports.
 			 */
 			if (term->esc_nargs <= 1
@@ -4074,7 +4074,7 @@ static void term_out(Terminal *term)
 			seen_disp_event(term);
 			break;
 		      case ANSI('|', '*'): /* DECSNLS */
-			/* 
+			/*
 			 * Set number of lines on screen
 			 * VT420 uses VGA like hardware and can
 			 * support any size in reasonable range
@@ -4299,7 +4299,7 @@ static void term_out(Terminal *term)
 			    strcat(term->id_string, "c");
 			}
 #if 0
-			/* Is this a good idea ? 
+			/* Is this a good idea ?
 			 * Well we should do a soft reset at this point ...
 			 */
 			if (!has_compat(VT420) && has_compat(VT100)) {
@@ -4362,8 +4362,8 @@ static void term_out(Terminal *term)
 		 * This OSC stuff is EVIL. It takes just one character to get into
 		 * sysline mode and it's not initially obvious how to get out.
 		 * So I've added CR and LF as string aborts.
-		 * This shouldn't effect compatibility as I believe embedded 
-		 * control characters are supposed to be interpreted (maybe?) 
+		 * This shouldn't effect compatibility as I believe embedded
+		 * control characters are supposed to be interpreted (maybe?)
 		 * and they don't display anything useful anyway.
 		 *
 		 * -- RDB
@@ -4900,8 +4900,8 @@ static void do_paint(Terminal *term, Context ctx, int may_optimise)
 
     /* Depends on:
      * screen array, disptop, scrtop,
-     * selection, rv, 
-     * blinkpc, blink_is_real, tblinker, 
+     * selection, rv,
+     * blinkpc, blink_is_real, tblinker,
      * curs.y, curs.x, cblinker, blink_cur, cursor_on, has_focus, wrapnext
      */
 
@@ -5017,7 +5017,7 @@ static void do_paint(Terminal *term, Context ctx, int may_optimise)
 	    tattr = d->attr;
 
             if (!term->ansi_colour)
-                tattr = (tattr & ~(ATTR_FGMASK | ATTR_BGMASK)) | 
+                tattr = (tattr & ~(ATTR_FGMASK | ATTR_BGMASK)) |
                 ATTR_DEFFG | ATTR_DEFBG;
 
 	    if (!term->xterm_256_colour) {
@@ -5037,8 +5037,8 @@ static void do_paint(Terminal *term, Context ctx, int may_optimise)
 	      case CSET_LINEDRW:
 		tchar = term->ucsdata->unitab_xterm[tchar & 0xFF];
 		break;
-	      case CSET_SCOACS:  
-		tchar = term->ucsdata->unitab_scoacs[tchar&0xFF]; 
+	      case CSET_SCOACS:
+		tchar = term->ucsdata->unitab_scoacs[tchar&0xFF];
 		break;
 	    }
 	    if (j < term->cols-1 && d[1].chr == UCSWIDE)
@@ -5066,7 +5066,7 @@ static void do_paint(Terminal *term, Context ctx, int may_optimise)
 	    }
 
 	    /*
-	     * Check the font we'll _probably_ be using to see if 
+	     * Check the font we'll _probably_ be using to see if
 	     * the character is wide when we don't want it to be.
 	     */
 	    if (tchar != term->disptext[i]->chars[j].chr ||
@@ -5094,7 +5094,7 @@ static void do_paint(Terminal *term, Context ctx, int may_optimise)
 	/*
 	 * Now loop over the line again, noting where things have
 	 * changed.
-	 * 
+	 *
 	 * During this loop, we keep track of where we last saw
 	 * DATTR_STARTRUN. Any mismatch automatically invalidates
 	 * _all_ of the containing run that was last printed: that
@@ -5422,7 +5422,7 @@ static void clipme(Terminal *term, pos top, pos bottom, int rect, int desel)
     int old_top_x;
     int attr;
 
-    buf.buflen = 5120;			
+    buf.buflen = 5120;
     buf.bufpos = 0;
     buf.textptr = buf.textbuf = snewn(buf.buflen, wchar_t);
     buf.attrptr = buf.attrbuf = snewn(buf.buflen, int);
@@ -5673,8 +5673,8 @@ static int wordtype(Terminal *term, int uc)
       case CSET_ASCII:
 	uc = term->ucsdata->unitab_line[uc & 0xFF];
 	break;
-      case CSET_SCOACS:  
-	uc = term->ucsdata->unitab_scoacs[uc&0xFF]; 
+      case CSET_SCOACS:
+	uc = term->ucsdata->unitab_scoacs[uc&0xFF];
 	break;
     }
     switch (uc & CSET_MASK) {
@@ -5748,7 +5748,7 @@ static pos sel_spread_half(Terminal *term, pos p, int dir)
 		    else
 			break;
 		} else {
-		    if (p.y+1 < term->rows && 
+		    if (p.y+1 < term->rows &&
                         (ldata->lattr & LATTR_WRAPPED)) {
 			termline *ldata2;
 			ldata2 = lineptr(p.y+1);
@@ -6053,7 +6053,7 @@ void term_mouse(Terminal *term, Mouse_Button braw, Mouse_Button bcooked,
 	default_seltype = RECTANGULAR;
     else
 	default_seltype = LEXICOGRAPHIC;
-	
+
     if (term->selstate == NO_SELECTION) {
 	term->seltype = default_seltype;
     }
@@ -6440,7 +6440,7 @@ int term_get_userpass_input(Terminal *term, prompts_t *p,
 		break;
 	    }
 	}
-	
+
     }
 
     if (s->curr_prompt < p->n_prompts) {

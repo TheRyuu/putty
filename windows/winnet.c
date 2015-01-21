@@ -472,7 +472,7 @@ char *winsock_error_string(int error)
                            MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
                            es->text + bufused, bufsize - bufused, NULL)) {
             sprintf(es->text + bufused,
-                    "Windows error code %d (and FormatMessage returned %d)", 
+                    "Windows error code %d (and FormatMessage returned %d)",
                     error, GetLastError());
         } else {
             int len = strlen(es->text);
@@ -1430,7 +1430,7 @@ void try_send(Actual_Socket s)
 	    if ((err < WSABASEERR && nsent < 0) || err == WSAEWOULDBLOCK) {
 		/*
 		 * Perfectly normal: we've sent all we can for the moment.
-		 * 
+		 *
 		 * (Some WinSock send() implementations can return
 		 * <0 but leave no sensible error indication -
 		 * WSAGetLastError() is called but returns zero or

@@ -270,15 +270,15 @@ void dputs(char *buf)
 
 /*
  * Design:
- * 
+ *
  * We start by reserving as much virtual address space as Windows
  * will sensibly (or not sensibly) let us have. We flag it all as
  * invalid memory.
- * 
+ *
  * Any allocation attempt is satisfied by committing one or more
  * pages, with an uncommitted page on either side. The returned
  * memory region is jammed up against the _end_ of the pages.
- * 
+ *
  * Freeing anything causes instantaneous decommitment of the pages
  * involved, so stale pointers are caught as soon as possible.
  */

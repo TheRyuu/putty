@@ -115,7 +115,7 @@ void win_setup_config_box(struct controlbox *b, HWND *hwndp, int has_help,
      * also the use of the PC speaker. For this we must search the
      * existing controlset for the radio-button set controlling the
      * `beep' option, and add extra buttons to it.
-     * 
+     *
      * Note that although this _looks_ like a hideous hack, it's
      * actually all above board. The well-defined interface to the
      * per-platform dialog box code is the _data structures_ `union

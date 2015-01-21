@@ -371,7 +371,7 @@ FontSpec *read_setting_fontspec(void *handle, const char *name)
      * In GTK1-only PuTTY, we used to store font names simply as a
      * valid X font description string (logical or alias), under a
      * bare key such as "Font".
-     * 
+     *
      * In GTK2 PuTTY, we have a prefix system where "client:"
      * indicates a Pango font and "server:" an X one; existing
      * configuration needs to be reinterpreted as having the
@@ -513,11 +513,11 @@ void enum_settings_finish(void *handle)
 
 /*
  * Lines in the host keys file are of the form
- * 
+ *
  *   type@port:hostname keydata
- * 
+ *
  * e.g.
- * 
+ *
  *   rsa@22:foovax.example.org 0x23,0x293487364395345345....2343
  */
 int verify_host_key(const char *hostname, int port,

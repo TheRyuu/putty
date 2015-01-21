@@ -798,7 +798,7 @@ void dlg_listbox_select(union control *ctrl, void *dlg, int index)
     if (uc->optmenu) {
 	gtk_option_menu_set_history(GTK_OPTION_MENU(uc->optmenu), index);
 	return;
-    } 
+    }
     if (uc->list) {
         int nitems;
         GList *items;
@@ -1303,7 +1303,7 @@ static gboolean listitem_key(GtkWidget *item, GdkEventKey *event,
         /*
          * Up, Down, PgUp or PgDn have been pressed on a ListItem
          * in a list box. So, if the list box is single-selection:
-         * 
+         *
          *  - if the list item in question isn't already selected,
          *    we simply select it.
          *  - otherwise, we find the next one (or next
@@ -1312,7 +1312,7 @@ static gboolean listitem_key(GtkWidget *item, GdkEventKey *event,
          *     + in this case, we must also fiddle with the
          *       scrollbar to ensure the newly selected item is
          *       actually visible.
-         * 
+         *
          * If it's multiple-selection, we do all of the above
          * except actually selecting anything, so we move the focus
          * and fiddle the scrollbar to follow it.
@@ -1330,7 +1330,7 @@ static gboolean listitem_key(GtkWidget *item, GdkEventKey *event,
                  event->keyval==GDK_Page_Up || event->keyval==GDK_KP_Page_Up)
                 ? -1 : +1;
             int step =
-                (event->keyval==GDK_Page_Down || 
+                (event->keyval==GDK_Page_Down ||
                  event->keyval==GDK_KP_Page_Down ||
                  event->keyval==GDK_Page_Up || event->keyval==GDK_KP_Page_Up)
                 ? 2 : 1;
@@ -1728,7 +1728,7 @@ static void filefont_clicked(GtkButton *button, gpointer data)
 
 	gtk_window_set_modal(fontsel->window, TRUE);
 	unifontsel_set_name(fontsel, fontname);
-	
+
 	gtk_object_set_data(GTK_OBJECT(fontsel->ok_button),
 			    "user-data", (gpointer)fontsel);
 	fontsel->user_data = uc;
@@ -1767,7 +1767,7 @@ static void label_sizealloc(GtkWidget *widget, GtkAllocation *alloc,
  * might be a GtkFrame containing a Columns; whatever it is, it's
  * definitely a GtkWidget and should probably be added to a
  * GtkVbox.)
- * 
+ *
  * `win' is required for setting the default button. If it is
  * non-NULL, all buttons created will be default-capable (so they
  * have extra space round them for the default highlight).
@@ -2188,7 +2188,7 @@ GtkWidget *layout_ctrls(struct dlgparam *dp, struct Shortcuts *scs,
                 /*
                  * Adjust the height of the scrolled window to the
                  * minimum given by the height parameter.
-                 * 
+                 *
                  * This piece of guesswork is a horrid hack based
                  * on looking inside the GTK 1.2 sources
                  * (specifically gtkviewport.c, which appears to be
@@ -2366,7 +2366,7 @@ GtkWidget *layout_ctrls(struct dlgparam *dp, struct Shortcuts *scs,
 	     * on. It can be as short as you like provided you
 	     * don't mind it being wide, or as narrow as you like
 	     * provided you don't mind it being tall.
-	     * 
+	     *
 	     * Therefore, it fits very badly into the layout model.
 	     * Hence the only thing to do is pick a width and let
 	     * it choose its own number of lines. To do this I'm

@@ -129,7 +129,7 @@ int ctrl_find_path(struct controlbox *b, char *path, int index)
 struct controlset *ctrl_settitle(struct controlbox *b,
 				 char *path, char *title)
 {
-    
+
     struct controlset *s = snew(struct controlset);
     int index = ctrl_find_set(b, path, 1);
     s->pathname = dupstr(path);

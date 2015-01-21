@@ -213,7 +213,7 @@ static Bignum rsa_privkey_op(Bignum input, struct RSAKey *key)
      * There are timing implications to the potential retries, of
      * course, but all they tell you is the modulus, which you
      * already knew.)
-     * 
+     *
      * To preserve determinism and avoid Pageant needing to share
      * the random number pool, we actually generate this `random'
      * number by hashing stuff with the private key.
@@ -296,7 +296,7 @@ static Bignum rsa_privkey_op(Bignum input, struct RSAKey *key)
      * attacker can't correlate the timing of the modpow with the
      * input, because they don't know anything about the number
      * that was input to the actual modpow.
-     * 
+     *
      * The clever bit is that we don't have to do a huge modpow to
      * get y and y^d; we will use the number we just invented as
      * _y^d_, and use the _public_ exponent to compute (y^d)^e = y
@@ -530,7 +530,7 @@ void freersakey(struct RSAKey *key)
 }
 
 /* ----------------------------------------------------------------------
- * Implementation of the ssh-rsa signing key type. 
+ * Implementation of the ssh-rsa signing key type.
  */
 
 static void getstring(char **data, int *datalen, char **p, int *length)
@@ -813,9 +813,9 @@ static char *rsa2_fingerprint(void *key)
  * This is the magic ASN.1/DER prefix that goes in the decoded
  * signature, between the string of FFs and the actual SHA hash
  * value. The meaning of it is:
- * 
+ *
  * 00 -- this marks the end of the FFs; not part of the ASN.1 bit itself
- * 
+ *
  * 30 21 -- a constructed SEQUENCE of length 0x21
  *    30 09 -- a constructed sub-SEQUENCE of length 9
  *       06 05 -- an object identifier, length 5
@@ -824,11 +824,11 @@ static char *rsa2_fingerprint(void *key)
  *       05 00 -- NULL
  *    04 14 -- a primitive OCTET STRING of length 0x14
  *       [0x14 bytes of hash data follows]
- * 
+ *
  * The object id in the middle there is listed as `id-sha1' in
  * ftp://ftp.rsasecurity.com/pub/pkcs/pkcs-1/pkcs-1v2-1d2.asn (the
  * ASN module for PKCS #1) and its expanded form is as follows:
- * 
+ *
  * id-sha1                OBJECT IDENTIFIER ::= {
  *    iso(1) identified-organization(3) oiw(14) secsig(3)
  *    algorithms(2) 26 }
@@ -1006,26 +1006,26 @@ void ssh_rsakex_encrypt(const struct ssh_hash *h, unsigned char *in, int inlen,
 
     /*
      * Here we encrypt using RSAES-OAEP. Essentially this means:
-     * 
+     *
      *  - we have a SHA-based `mask generation function' which
      *    creates a pseudo-random stream of mask data
      *    deterministically from an input chunk of data.
-     * 
+     *
      *  - we have a random chunk of data called a seed.
-     * 
+     *
      *  - we use the seed to generate a mask which we XOR with our
      *    plaintext.
-     * 
+     *
      *  - then we use _the masked plaintext_ to generate a mask
      *    which we XOR with the seed.
-     * 
+     *
      *  - then we concatenate the masked seed and the masked
      *    plaintext, and RSA-encrypt that lot.
-     * 
+     *
      * The result is that the data input to the encryption function
      * is random-looking and (hopefully) contains no exploitable
      * structure such as PKCS1-v1_5 does.
-     * 
+     *
      * For a precise specification, see RFC 3447, section 7.1.1.
      * Some of the variable names below are derived from that, so
      * it'd probably help to read it anyway.

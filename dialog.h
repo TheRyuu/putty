@@ -11,7 +11,7 @@
 /*
  * This is the big union which defines a single control, of any
  * type.
- * 
+ *
  * General principles:
  *  - _All_ pointers in this structure are expected to point to
  *    dynamically allocated things, unless otherwise indicated.
@@ -43,7 +43,7 @@ enum {
  * since the user might reasonably want to store either an integer
  * or a void * pointer. Here I define a union, and two convenience
  * functions to create that union from actual integers or pointers.
- * 
+ *
  * The convenience functions are declared as inline if possible.
  * Otherwise, they're declared here and defined when this header is
  * included with DEFINE_INTORPTR_FNS defined. This is a total pain,
@@ -71,7 +71,7 @@ PREFIX intorptr P(void *p) { intorptr ret; ret.p = p; return ret; }
  * Each control has an `int' field specifying which columns it
  * occupies in a multi-column part of the dialog box. These macros
  * pack and unpack that field.
- * 
+ *
  * If a control belongs in exactly one column, just specifying the
  * column number is perfectly adequate.
  */
@@ -135,11 +135,11 @@ union control {
 	 * everywhere else, we avoid having to have an irritating
 	 * switch statement when we go through and deallocate all
 	 * the memory in a config-box structure.
-	 * 
+	 *
 	 * Yes, this does mean that any non-NULL value in this
 	 * field is expected to be dynamically allocated and
 	 * freeable.
-	 * 
+	 *
 	 * For CTRL_COLUMNS, this field MUST be NULL.
 	 */
 	char *label;
@@ -159,12 +159,12 @@ union control {
 	 * Most controls need to provide a function which gets
 	 * called when that control's setting is changed, or when
 	 * the control's setting needs initialising.
-	 * 
+	 *
 	 * The `data' parameter points to the writable data being
 	 * modified as a result of the configuration activity; for
 	 * example, the PuTTY `Conf' structure, although not
 	 * necessarily.
-	 * 
+	 *
 	 * The `dlg' parameter is passed back to the platform-
 	 * specific routines to read and write the actual control
 	 * state.
@@ -209,7 +209,7 @@ union control {
 	 * has a drop-down list built in. (Note that a _non_-
 	 * editable drop-down list is done as a special case of a
 	 * list box.)
-	 * 
+	 *
 	 * Don't try setting has_list and password on the same
 	 * control; front ends are not required to support that
 	 * combination.
@@ -233,7 +233,7 @@ union control {
 	/*
 	 * There are separate fields for `ncolumns' and `nbuttons'
 	 * for several reasons.
-	 * 
+	 *
 	 * Firstly, we sometimes want the last of a set of buttons
 	 * to have a longer label than the rest; we achieve this by
 	 * setting `ncolumns' higher than `nbuttons', and the
@@ -246,7 +246,7 @@ union control {
 	 * but actually it's reasonably common for the sort of
 	 * three-way control you get a lot of in PuTTY: `yes'
 	 * versus `no' versus `some more complex way to decide'.
-	 * 
+	 *
 	 * Secondly, setting `nbuttons' higher than `ncolumns' lets
 	 * us have more than one line of radio buttons for a single
 	 * setting. A very important special case of this is
@@ -312,7 +312,7 @@ union control {
 	 * If this is non-zero, the list can have more than one
 	 * element selected at a time. This is not guaranteed to
 	 * work on a drop-down list, so don't try it!
-	 * 
+	 *
 	 * Different non-zero values request slightly different
 	 * types of multi-selection (this may well be meaningful
 	 * only in GTK, so everyone else can ignore it if they
@@ -337,7 +337,7 @@ union control {
 	 * the respective widths of `ncols' columns, which together
 	 * will exactly fit the width of the list box. Otherwise
 	 * `percentages' must be NULL.
-	 * 
+	 *
 	 * There should never be more than one column in a
 	 * drop-down list (one with height==0), because front ends
 	 * may have to implement it as a special case of an
@@ -360,11 +360,11 @@ union control {
 	 * default; for example, when selecting private key files
 	 * the file selector would do well to only show .PPK files
 	 * (on those systems where this is the chosen extension).
-	 * 
+	 *
 	 * The precise contents of `filter' are platform-defined,
 	 * unfortunately. The special value NULL means `all files'
 	 * and is always a valid fallback.
-	 * 
+	 *
 	 * Unlike almost all strings in this structure, this value
 	 * is NOT expected to require freeing (although of course
 	 * you can always use ctrl_alloc if you do need to create
@@ -384,7 +384,7 @@ union control {
 	/*
 	 * On at least some platforms, the file selector is a
 	 * separate dialog box, and contains a user-settable title.
-	 * 
+	 *
 	 * This value _is_ expected to require freeing.
 	 */
 	char *title;
@@ -402,7 +402,7 @@ union control {
 	 * trouble than it was worth. If you must lay things out
 	 * like that, define eight unevenly sized columns and use
 	 * column-spanning a lot. But better still, just don't.
-	 * 
+	 *
 	 * `percentages' may be NULL if ncols==1, to save space.
 	 */
     } columns;
@@ -419,7 +419,7 @@ union control {
  * structures, together with a panel name and a title for the whole
  * set. In Windows and any similar-looking GUI, each `controlset'
  * in the config will be a container box within a panel.
- * 
+ *
  * Special case: if `boxname' is NULL, the control set gives an
  * overall title for an entire panel of controls.
  */
@@ -484,7 +484,7 @@ void *ctrl_alloc_with_free(struct controlbox *b, size_t size,
 
 /*
  * Individual routines to create `union control' structures in a controlset.
- * 
+ *
  * Most of these routines allow the most common fields to be set
  * directly, and put default values in the rest. Each one returns a
  * pointer to the `union control' it created, so that final tweaks
@@ -614,7 +614,7 @@ void dlg_end(void *dlg, int value);
  * dlg_coloursel_results() fetches the results, as integers from 0
  * to 255; it returns nonzero on success, or zero if the colour
  * selector was dismissed by hitting Cancel or similar.
- * 
+ *
  * dlg_coloursel_start() accepts an RGB triple which is used to
  * initialise the colour selector to its starting value.
  */
@@ -628,7 +628,7 @@ int dlg_coloursel_results(union control *ctrl, void *dlg,
  * indicate that the value of a particular control is likely to
  * have changed. It triggers a call of the handler for that control
  * with `event' set to EVENT_REFRESH.
- * 
+ *
  * If `ctrl' is NULL, _all_ controls in the dialog get refreshed
  * (for loading or saving entire sets of settings).
  */
@@ -638,7 +638,7 @@ void dlg_refresh(union control *ctrl, void *dlg);
  * It's perfectly possible that individual controls might need to
  * allocate or store per-dialog-instance data, so here's a
  * mechanism.
- * 
+ *
  * `dlg_get_privdata' and `dlg_set_privdata' allow the user to get
  * and set a void * pointer associated with the control in
  * question. `dlg_alloc_privdata' will allocate memory, store a
@@ -657,7 +657,7 @@ void *dlg_alloc_privdata(union control *ctrl, void *dlg, size_t size);
  * Find the index of next controlset in a controlbox for a given
  * path, or -1 if no such controlset exists. If -1 is passed as
  * input, finds the first. Intended usage is something like
- * 
+ *
  * 	for (index=-1; (index=ctrl_find_path(ctrlbox, index, path)) >= 0 ;) {
  *          ... process this controlset ...
  *      }

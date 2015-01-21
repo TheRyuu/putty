@@ -10,9 +10,9 @@
 
 /*
  * Still to be implemented:
- * 
+ *
  *  - file selectors (NSOpenPanel / NSSavePanel)
- * 
+ *
  *  - font selectors
  *  - colour selectors
  *     * both of these have a conceptual oddity in Cocoa that
@@ -33,7 +33,7 @@
  * 	 Mac Classic port and see how it's done there, on the basis
  * 	 that Apple seem reasonably unlikely to have invented this
  * 	 crazy restriction specifically for OS X.
- * 
+ *
  *  - focus management
  *     * I tried using makeFirstResponder to give keyboard focus,
  * 	 but it appeared not to work. Try again, and work out how
@@ -42,7 +42,7 @@
  * 	 that only edit boxes and list boxes can get the keyboard
  * 	 focus, and that buttons (in all their forms) are unable to
  * 	 be driven by the keyboard. Find out for sure.
- * 
+ *
  *  - dlg_error_msg
  *     * this may run into the usual aggro with modal dialog boxes.
  */
@@ -58,31 +58,31 @@
 
 /*
  * As yet unsolved issues [FIXME]:
- * 
+ *
  *  - Sometimes the height returned from create_ctrls and the
  *    height returned from place_ctrls differ. Find out why. It may
  *    be harmless (e.g. results of NSTextView being odd), but I
  *    want to know.
- * 
+ *
  *  - NSTextViews are indented a bit. It'd be nice to put their
  *    left margin at the same place as everything else's.
- * 
+ *
  *  - I don't yet know whether we even _can_ support tab order or
  *    keyboard shortcuts. If we can't, then fair enough, we can't.
  *    But if we can, we should.
- * 
+ *
  *  - I would _really_ like to know of a better way to correct
  *    NSButton's stupid size estimates than by subclassing it and
  *    overriding sizeToFit with hard-wired sensible values!
- * 
+ *
  *  - Speaking of stupid size estimates, the amount by which I'm
  *    adjusting a titled NSBox (currently equal to the point size
  *    of its title font) looks as if it isn't _quite_ enough.
  *    Figure out what the real amount should be and use it.
- * 
+ *
  *  - I don't understand why there's always a scrollbar displayed
  *    in each list box. I thought I told it to autohide scrollers?
- * 
+ *
  *  - Why do I have to fudge list box heights by adding one? (Might
  *    it be to do with the missing header view?)
  */

@@ -62,7 +62,7 @@ unifont *multifont_create(GtkWidget *widget, const char *name,
  * Unified font selector dialog. I can't be bothered to do a
  * proper GTK subclassing today, so this will just be an ordinary
  * data structure with some useful members.
- * 
+ *
  * (Of course, these aren't the only members; this structure is
  * contained within a bigger one which holds data visible only to
  * the implementation.)

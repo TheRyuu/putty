@@ -878,7 +878,7 @@ static int telnet_send(void *handle, char *buf, int len)
 	telnet->bufsize = sk_write(telnet->s, (char *)q, p - q);
 
 	while (p < end && !iswritable(*p)) {
-	    telnet->bufsize = 
+	    telnet->bufsize =
 		sk_write(telnet->s, (char *)(*p == IAC ? iac : cr), 2);
 	    p++;
 	}

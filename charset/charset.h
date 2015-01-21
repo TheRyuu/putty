@@ -77,7 +77,7 @@ typedef struct {
 
 /*
  * Routine to convert a MB/SB character set to Unicode.
- * 
+ *
  * This routine accepts some number of bytes, updates a state
  * variable, and outputs some number of Unicode characters. There
  * are no guarantees. You can't even guarantee that at most one
@@ -86,12 +86,12 @@ typedef struct {
  * then you suddenly see FE. Now you need to output _two_ error
  * characters - one for the incomplete sequence E1 80, and one for
  * the completely invalid UTF-8 byte FE.
- * 
+ *
  * Returns the number of wide characters output; will never output
  * more than the size of the buffer (as specified on input).
  * Advances the `input' pointer and decrements `inlen', to indicate
  * how far along the input string it got.
- * 
+ *
  * The sequence of `errlen' wide characters pointed to by `errstr'
  * will be used to indicate a conversion error. If `errstr' is
  * NULL, `errlen' will be ignored, and the library will choose
@@ -106,16 +106,16 @@ int charset_to_unicode(const char **input, int *inlen,
 
 /*
  * Routine to convert Unicode to an MB/SB character set.
- * 
+ *
  * This routine accepts some number of Unicode characters, updates
  * a state variable, and outputs some number of bytes.
- * 
+ *
  * Returns the number of bytes characters output; will never output
  * more than the size of the buffer (as specified on input), and
  * will never output a partial MB character. Advances the `input'
  * pointer and decrements `inlen', to indicate how far along the
  * input string it got.
- * 
+ *
  * The sequence of `errlen' characters pointed to by `errstr' will
  * be used to indicate a conversion error. If `errstr' is NULL,
  * `errlen' will be ignored, and the library will choose something

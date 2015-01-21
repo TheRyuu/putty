@@ -510,11 +510,11 @@ static gint columns_focus(GtkContainer *container, GtkDirectionType dir)
 /*
  * Now here comes the interesting bit. The actual layout part is
  * done in the following two functions:
- * 
+ *
  * columns_size_request() examines the list of widgets held in the
  * Columns, and returns a requisition stating the absolute minimum
  * size it can bear to be.
- * 
+ *
  * columns_size_allocate() is given an allocation telling it what
  * size the whole container is going to be, and it calls
  * gtk_widget_size_allocate() on all of its (visible) children to
@@ -710,7 +710,7 @@ static void columns_size_allocate(GtkWidget *widget, GtkAllocation *alloc)
         /*
          * Starting x position is cols[colstart].
          * Ending x position is cols[colstart+colspan] - spacing.
-	 * 
+	 *
 	 * Unless we're forcing left, in which case the width is
 	 * exactly the requisition width.
          */
@@ -748,5 +748,5 @@ static void columns_size_allocate(GtkWidget *widget, GtkAllocation *alloc)
     }
 
     g_free(colxpos);
-    g_free(colypos);    
+    g_free(colypos);
 }

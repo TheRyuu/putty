@@ -182,7 +182,7 @@ void frontend_echoedit_update(void *frontend, int echo, int edit)
 	mode.c_iflag &= ~IXON;
 	mode.c_iflag &= ~IXOFF;
     }
-    /* 
+    /*
      * Mark parity errors and (more important) BREAK on input.  This
      * is more complex than it need be because POSIX-2001 suggests
      * that escaping of valid 0xff in the input stream is dependent on
@@ -491,7 +491,7 @@ static void from_tty(void *vbuf, unsigned len)
 		if (*p == '\0') {
 		    back->special(backhandle, TS_BRK);
 		} else {
-		    /* 
+		    /*
 		     * Pretend that PARMRK wasn't set.  This involves
 		     * faking what INPCK and IGNPAR would have done if
 		     * we hadn't overridden them.  Unfortunately, we
@@ -852,7 +852,7 @@ int main(int argc, char **argv)
          */
         {
             char *c = host_strchr(host, ':');
- 
+
             if (c) {
                 char *d = host_strchr(c+1, ':');
                 if (!d)

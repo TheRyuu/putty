@@ -128,7 +128,7 @@ typedef Ssh_gss_stat (*t_ssh_gss_free_mic)(struct ssh_gss_library *lib,
  * message string is returned in "buf", with buf->len giving the
  * number of characters of printable message text and buf->data
  * containing one more character which is a trailing NUL.
- * buf->data should be manually freed by the caller. 
+ * buf->data should be manually freed by the caller.
  */
 typedef Ssh_gss_stat (*t_ssh_gss_display_status)(struct ssh_gss_library *lib,
 						 Ssh_gss_ctx, Ssh_gss_buf *buf);

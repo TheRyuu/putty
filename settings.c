@@ -381,7 +381,7 @@ static void gprefs(void *sesskey, char *name, char *def,
     }
 }
 
-/* 
+/*
  * Write out a preference list.
  */
 static void wprefs(void *sesskey, char *name,

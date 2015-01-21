@@ -5,7 +5,7 @@
  * announcing what character set it will be using), and a set of
  * enumeration functions which return a list of supported
  * encodings one by one.
- * 
+ *
  * charset_from_localenc will attempt all other text translations
  * as well as this table, to maximise the number of different ways
  * you can select a supported charset.

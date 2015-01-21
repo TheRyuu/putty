@@ -253,7 +253,7 @@ int font_dimension(void *frontend, int which)/* 0 for width, 1 for height */
 /*
  * Translate a raw mouse button designation (LEFT, MIDDLE, RIGHT)
  * into a cooked one (SELECT, EXTEND, PASTE).
- * 
+ *
  * In Unix, this is not configurable; the X button arrangement is
  * rock-solid across all applications, everyone has a three-button
  * mouse or a means of faking it, and there is no need to switch
@@ -547,7 +547,7 @@ gint key_event(GtkWidget *widget, GdkEventKey *event, gpointer data)
     /*
      * If Alt is being released after typing an Alt+numberpad
      * sequence, we should generate the code that was typed.
-     * 
+     *
      * Note that we only do this if more than one key was actually
      * pressed - I don't think Alt+NumPad4 should be ^D or that
      * Alt+NumPad3 should be ^C, for example. There's no serious
@@ -1148,7 +1148,7 @@ gint key_event(GtkWidget *widget, GdkEventKey *event, gpointer data)
 	/*
 	 * Cursor keys. (This includes the numberpad cursor keys,
 	 * if we haven't already done them due to app keypad mode.)
-	 * 
+	 *
 	 * Here we also process un-numlocked un-appkeypadded KP5,
 	 * which sends ESC [ G.
 	 */
@@ -1638,7 +1638,7 @@ void request_resize(void *frontend, int w, int h)
      * prevent gratuitous resize processing on the window given
      * that we're about to resize it anyway, but I have no idea
      * why that's so incredibly vital.
-     * 
+     *
      * I've tried removing the call, and nothing seems to go
      * wrong. I've backtracked to r3092 and tried removing the
      * call there, and still nothing goes wrong. So I'm going to
@@ -1719,7 +1719,7 @@ void palette_reset(void *frontend)
 	    conf_get_int_int(inst->conf, CONF_colours, i*3+0) * 0x0101;
 	inst->cols[ww[i]].green =
 	    conf_get_int_int(inst->conf, CONF_colours, i*3+1) * 0x0101;
-	inst->cols[ww[i]].blue = 
+	inst->cols[ww[i]].blue =
 	    conf_get_int_int(inst->conf, CONF_colours, i*3+2) * 0x0101;
     }
 
@@ -2170,7 +2170,7 @@ int char_width(Context ctx, int uc)
      * Under X, any fixed-width font really _is_ fixed-width.
      * Double-width characters will be dealt with using a separate
      * font. For the moment we can simply return 1.
-     * 
+     *
      * FIXME: but is that also true of Pango?
      */
     return 1;
@@ -3243,7 +3243,7 @@ void fork_and_exec_self(struct gui_data *inst, int fd_to_close, ...)
      * Re-execing ourself is not an exact science under Unix. I do
      * the best I can by using /proc/self/exe if available and by
      * assuming argv[0] can be found on $PATH if not.
-     * 
+     *
      * Note that we also have to reconstruct the elements of the
      * original argv which gtk swallowed, since the user wants the
      * new session to appear on the same X display as the old one.

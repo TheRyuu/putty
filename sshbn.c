@@ -660,7 +660,7 @@ static void internal_mod(BignumInt *a, int alen,
 	if (h >= m0) {
 	    /*
 	     * Special case.
-	     * 
+	     *
 	     * To illustrate it, suppose a BignumInt is 8 bits, and
 	     * we are dividing (say) A1:23:45:67 by A1:B2:C3. Then
 	     * our initial division will be 0xA123 / 0xA1, which
@@ -669,7 +669,7 @@ static void internal_mod(BignumInt *a, int alen,
 	     * are not violated, since the full number A1:23:... is
 	     * _less_ than the quotient prefix A1:B2:... and so the
 	     * following correction loop would have sorted it out.
-	     * 
+	     *
 	     * In this situation we set q to be the largest
 	     * quotient we _can_ stomach (0xFF, of course).
 	     */
@@ -1976,7 +1976,7 @@ int main(int argc, char **argv)
             if (ptrnum >= lenof(ptrs))
                 break;
             ptrs[ptrnum++] = q;
-            
+
             for (i = -((end - start) & 1); i < end-start; i += 2) {
                 unsigned char val = (i < 0 ? 0 : fromxdigit(start[i]));
                 val = val * 16 + fromxdigit(start[i+1]);
@@ -2005,7 +2005,7 @@ int main(int argc, char **argv)
                 char *bs = bignum_decimal(b);
                 char *cs = bignum_decimal(c);
                 char *ps = bignum_decimal(p);
-                
+
                 printf("%d: fail: %s * %s gave %s expected %s\n",
                        line, as, bs, ps, cs);
                 fails++;
@@ -2041,7 +2041,7 @@ int main(int argc, char **argv)
                 char *ms = bignum_decimal(m);
                 char *cs = bignum_decimal(c);
                 char *ps = bignum_decimal(p);
-                
+
                 printf("%d: fail: %s * %s mod %s gave %s expected %s\n",
                        line, as, bs, ms, ps, cs);
                 fails++;
@@ -2079,7 +2079,7 @@ int main(int argc, char **argv)
                 char *cs = bignum_decimal(modulus);
                 char *ds = bignum_decimal(answer);
                 char *ps = bignum_decimal(expected);
-                
+
                 printf("%d: fail: %s ^ %s mod %s gave %s expected %s\n",
                        line, as, bs, cs, ds, ps);
                 fails++;

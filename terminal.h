@@ -45,11 +45,11 @@ struct termchar {
      * The cc_next field is used to link multiple termchars
      * together into a list, so as to fit more than one character
      * into a character cell (Unicode combining characters).
-     * 
+     *
      * cc_next is a relative offset into the current array of
      * termchars. I.e. to advance to the next character in a list,
      * one does `tc += tc->next'.
-     * 
+     *
      * Zero means end of list.
      */
     int cc_next;

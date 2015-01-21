@@ -215,7 +215,7 @@ void MD5Simple(void const *p, unsigned len, unsigned char output[16])
 /* ----------------------------------------------------------------------
  * The above is the MD5 algorithm itself. Now we implement the
  * HMAC wrapper on it.
- * 
+ *
  * Some of these functions are exported directly, because they are
  * useful elsewhere (SOCKS5 CHAP authentication uses HMAC-MD5).
  */

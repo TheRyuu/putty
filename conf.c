@@ -357,7 +357,7 @@ void conf_set_int(Conf *conf, int primary, int value)
     assert(subkeytypes[primary] == TYPE_NONE);
     assert(valuetypes[primary] == TYPE_INT);
     entry->key.primary = primary;
-    entry->value.u.intval = value; 
+    entry->value.u.intval = value;
     conf_insert(conf, entry);
 }
 

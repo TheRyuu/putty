@@ -1,6 +1,6 @@
 /*
  * SHA-256 algorithm as described at
- * 
+ *
  *   http://csrc.nist.gov/cryptval/shs.html
  */
 

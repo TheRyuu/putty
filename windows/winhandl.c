@@ -9,14 +9,14 @@
  * data, the subthread sets an event object which is picked up by
  * the main thread, and the main thread then sets an event in
  * return to instruct the subthread to resume reading.
- * 
+ *
  * Output works precisely the other way round, in a second
  * subthread. The output subthread should not be attempting to
  * write all the time, because it hasn't always got data _to_
  * write; so the output thread waits for an event object notifying
  * it to _attempt_ a write, and then it sets an event in return
  * when one completes.
- * 
+ *
  * (It's terribly annoying having to spawn a subthread for each
  * direction of each handle. Technically it isn't necessary for
  * serial ports, since we could use overlapped I/O within the main
@@ -47,7 +47,7 @@ struct handle_generic {
     /*
      * Initial fields common to both handle_input and handle_output
      * structures.
-     * 
+     *
      * The three HANDLEs are set up at initialisation time and are
      * thereafter read-only to both main thread and subthread.
      * `moribund' is only used by the main thread; `done' is

@@ -3,7 +3,7 @@
  *
  * The way this works is: a back end can choose to open any number
  * of sockets - including zero, which might be necessary in some.
- * It can register a bunch of callbacks (most notably for when 
+ * It can register a bunch of callbacks (most notably for when
  * data is received) for each socket, and it can call the networking
  * abstraction to send data without having to worry about blocking.
  * The stuff behind the abstraction takes care of selects and
@@ -49,7 +49,7 @@ struct plug_function_table {
     /*
      * Passes the client progress reports on the process of setting
      * up the connection.
-     * 
+     *
      * 	- type==0 means we are about to try to connect to address
      * 	  `addr' (error_msg and error_code are ignored)
      * 	- type==1 means we have failed to connect to address `addr'
@@ -67,10 +67,10 @@ struct plug_function_table {
     /*
      *  - urgent==0. `data' points to `len' bytes of perfectly
      *    ordinary data.
-     * 
+     *
      *  - urgent==1. `data' points to `len' bytes of data,
      *    which were read from before an Urgent pointer.
-     * 
+     *
      *  - urgent==2. `data' points to `len' bytes of data,
      *    the first of which was the one at the Urgent mark.
      */
@@ -167,13 +167,13 @@ const char *sk_addr_error(SockAddr addr);
  * which all READABLE notifications are ignored, so that data is
  * not accepted from the peer until the socket is unfrozen. This
  * exists for two purposes:
- * 
+ *
  *  - Port forwarding: when a local listening port receives a
  *    connection, we do not want to receive data from the new
  *    socket until we have somewhere to send it. Hence, we freeze
  *    the socket until its associated SSH channel is ready; then we
  *    unfreeze it and pending data is delivered.
- * 
+ *
  *  - Socket buffering: if an SSH channel (or the whole connection)
  *    backs up or presents a zero window, we must freeze the
  *    associated local socket in order to avoid unbounded buffer

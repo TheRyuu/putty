@@ -50,14 +50,14 @@
 
     /*
      * Initialise the fonts we're going to use.
-     * 
+     *
      * FIXME: for the moment I'm sticking with exactly one default font.
      */
     font = [NSFont userFixedPitchFontOfSize:0];
 
     /*
      * Now determine the size of the primary font.
-     * 
+     *
      * FIXME: If we have multiple fonts, we may need to set fasc
      * and fdesc to the _maximum_ asc and desc out of all the
      * fonts, _before_ adding them together to get fh.
@@ -161,7 +161,7 @@
 
     /*
      * Create an NSString and draw it.
-     * 
+     *
      * Annoyingly, although our input is wchar_t which is four
      * bytes wide on OS X and terminal.c supports 32-bit Unicode,
      * we must convert into the two-byte type `unichar' to store in
@@ -384,12 +384,12 @@
 
     /*
      * FIXME: Alt (Option? Command?) prefix in general.
-     * 
+     *
      * (Note that Alt-Shift-thing will work just by looking at
      * charactersIgnoringModifiers; but Alt-Ctrl-thing will need
      * processing properly, and Alt-as-in-Option won't happen at
      * all. Hmmm.)
-     * 
+     *
      * (Note also that we need to be able to override menu key
      * equivalents before this is particularly useful.)
      */
@@ -688,7 +688,7 @@
 	if (cfg.funky_type == FUNKY_LINUX && code >= 11 && code <= 15) {
 	    output[end++] = '\033';
 	    output[end++] = '[';
-	    output[end++] = '[';	
+	    output[end++] = '[';
 	    output[end++] = code + 'A' - 11;
 	    goto done;
 	}
@@ -1078,7 +1078,7 @@ void set_iconic(void *frontend, int iconic)
  */
 void move_window(void *frontend, int x, int y)
 {
-    //SessionWindow *win = (SessionWindow *)frontend; 
+    //SessionWindow *win = (SessionWindow *)frontend;
     /* FIXME */
 }
 

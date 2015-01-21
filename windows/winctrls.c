@@ -249,12 +249,12 @@ static void radioline_common(struct ctlpos *cp, char *text, int id,
  * (you might want this not to equal the number of buttons if you
  * needed to line up some 2s and some 3s to look good in the same
  * panel).
- * 
+ *
  * There's a bit of a hack in here to ensure that if nacross
  * exceeds the actual number of buttons, the rightmost button
  * really does get all the space right to the edge of the line, so
  * you can do things like
- * 
+ *
  * (*) Button1  (*) Button2  (*) ButtonWithReallyLongTitle
  */
 void radioline(struct ctlpos *cp, char *text, int id, int nacross, ...)
@@ -1021,7 +1021,7 @@ int pl_itemfrompt(HWND hwnd, POINT cursor, BOOL scroll)
 
 /*
  * Handler for prefslist above.
- * 
+ *
  * Return value has bit 0 set if the dialog box procedure needs to
  * return TRUE from handling this message; it has bit 1 set if a
  * change may have been made in the contents of the list.
@@ -1159,7 +1159,7 @@ void progressbar(struct ctlpos *cp, int id)
  * places a single (unescaped) ampersand in front of the first
  * occurrence of the given shortcut character (which may be
  * NO_SHORTCUT).
- * 
+ *
  * Return value is a malloc'ed copy of the processed version of the
  * string.
  */

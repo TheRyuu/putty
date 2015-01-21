@@ -1,6 +1,6 @@
 /*
  * Unified font management for GTK.
- * 
+ *
  * PuTTY is willing to use both old-style X server-side bitmap
  * fonts _and_ GTK2/Pango client-side fonts. This requires us to
  * do a bit of work to wrap the two wildly different APIs into
@@ -25,11 +25,11 @@
 
 /*
  * Future work:
- * 
+ *
  *  - it would be nice to have a display of the current font name,
  *    and in particular whether it's client- or server-side,
  *    during the progress of the font selector.
- * 
+ *
  *  - it would be nice if we could move the processing of
  *    underline and VT100 double width into this module, so that
  *    instead of using the ghastly pixmap-stretching technique
@@ -49,7 +49,7 @@
 /*
  * Ad-hoc vtable mechanism to allow font structures to be
  * polymorphic.
- * 
+ *
  * Any instance of `unifont' used in the vtable functions will
  * actually be the first element of a larger structure containing
  * data specific to the subtype. This is permitted by the ISO C
@@ -120,7 +120,7 @@ struct x11font {
     /*
      * Actual font objects. We store a number of these, for
      * automatically guessed bold and wide variants.
-     * 
+     *
      * The parallel array `allocated' indicates whether we've
      * tried to fetch a subfont already (thus distinguishing NULL
      * because we haven't tried yet from NULL because we tried and
@@ -755,7 +755,7 @@ static void x11font_enum_fonts(GtkWidget *widget,
 	    /*
 	     * This isn't an XLFD, so it must be an alias.
 	     * Transmit it with mostly null data.
-	     * 
+	     *
 	     * It would be nice to work out if it's monospaced
 	     * here, but at the moment I can't see that being
 	     * anything but computationally hideous. Ah well.
@@ -777,7 +777,7 @@ static char *x11font_canonify_fontname(GtkWidget *widget, const char *name,
      * exists), and then canonify it by extracting its FONT
      * property, which should give its full XLFD even if what we
      * originally had was a wildcard.
-     * 
+     *
      * However, we must carefully avoid canonifying font
      * _aliases_, unless specifically asked to, because the font
      * selector treats them as worthwhile in their own right.
@@ -1317,7 +1317,7 @@ static void pangofont_enum_fonts(GtkWidget *widget, fontsel_add_entry callback,
 
 		    n = pango_font_description_get_variant(desc);
 		    p += sprintf(p, " %2d", n);
-		    
+
 		}
 
 		/*
@@ -1455,11 +1455,11 @@ static const struct unifont_vtable *unifont_types[] = {
  * scheme prefix. Returns the tail of the font name suitable for
  * passing to individual font scheme functions, and also provides
  * a subrange of the unifont_types[] array above.
- * 
+ *
  * The return values `start' and `end' denote a half-open interval
  * in unifont_types[]; that is, the correct way to iterate over
  * them is
- * 
+ *
  *   for (i = start; i < end; i++) {...}
  */
 static const char *unifont_do_prefix(const char *name, int *start, int *end)
@@ -2070,7 +2070,7 @@ static void unifontsel_select_font(unifontsel_internal *fs,
     gtk_widget_set_sensitive(fs->u.ok_button, TRUE);
 
     /*
-     * Find the index of this fontinfo in the selorder list. 
+     * Find the index of this fontinfo in the selorder list.
      */
     index = -1;
     findpos234(fs->fonts_by_selorder, info, NULL, &index);
@@ -2502,7 +2502,7 @@ static gint unifontsel_configure_area(GtkWidget *widget,
     if (x > ox || y > oy) {
 	if (fs->preview_pixmap)
 	    gdk_pixmap_unref(fs->preview_pixmap);
-	
+
 	nx = (x > ox ? x : ox);
 	ny = (y > oy ? y : oy);
 	fs->preview_pixmap = gdk_pixmap_new(widget->window, nx, ny, -1);

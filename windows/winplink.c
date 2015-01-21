@@ -530,7 +530,7 @@ int main(int argc, char **argv)
          */
         {
             char *c = host_strchr(host, ':');
- 
+
             if (c) {
                 char *d = host_strchr(c+1, ':');
                 if (!d)
@@ -649,7 +649,7 @@ int main(int argc, char **argv)
 
     while (1) {
 	int nhandles;
-	HANDLE *handles;	
+	HANDLE *handles;
 	int n;
 	DWORD ticks;
 

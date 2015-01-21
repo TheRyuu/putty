@@ -177,7 +177,7 @@ int init_ucs(struct unicode_data *ucsdata, char *linecharset,
      * Set up unitab_xterm. This is the same as unitab_line except
      * in the line-drawing regions, where it follows the Unicode
      * encoding.
-     * 
+     *
      * (Note that the strange X encoding of line-drawing characters
      * in the bottom 32 glyphs of ISO8859-1 fonts is taken care of
      * by the font encoding, which will spot such a font and act as

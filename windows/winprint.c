@@ -84,7 +84,7 @@ printer_enum *printer_start_enum(int *nprinters_ptr)
 	break;
     }
     ret->nprinters = *nprinters_ptr;
-    
+
     return ret;
 
     error:

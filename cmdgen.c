@@ -18,18 +18,18 @@
 /*
  * This section overrides some definitions below for test purposes.
  * When compiled with -DTEST_CMDGEN:
- * 
+ *
  *  - Calls to get_random_data() are replaced with the diagnostic
  *    function below (I #define the name so that I can still link
  *    with the original set of modules without symbol clash), in
  *    order to avoid depleting the test system's /dev/random
  *    unnecessarily.
- * 
+ *
  *  - Calls to console_get_userpass_input() are replaced with the
  *    diagnostic function below, so that I can run tests in an
  *    automated manner and provide their interactive passphrase
  *    inputs.
- * 
+ *
  *  - main() is renamed to cmdgen_main(); at the bottom of the file
  *    I define another main() which calls the former repeatedly to
  *    run tests.
@@ -214,7 +214,7 @@ static int save_ssh2_pubkey(char *filename, char *comment,
     }
     if (column > 0)
 	fputc('\n', fp);
-    
+
     fprintf(fp, "---- END SSH2 PUBLIC KEY ----\n");
     if (filename)
 	fclose(fp);
@@ -356,7 +356,7 @@ int main(int argc, char **argv)
 			/*
 			 * For long options requiring an argument, add
 			 * code along the lines of
-			 * 
+			 *
 			 * else if (!strcmp(opt, "-output")) {
 			 *     if (!val) {
 			 *         errs = TRUE;
@@ -532,7 +532,7 @@ int main(int argc, char **argv)
 	return 1;
     }
 
-    /* 
+    /*
      * We must save the private part when generating a new key.
      */
     if (keytype != NOKEYGEN &&
@@ -558,7 +558,7 @@ int main(int argc, char **argv)
 	     * convert them to other public key types, (b) print
 	     * out their fingerprints. Or, I suppose, for real
 	     * orthogonality, (c) change their comment!
-	     * 
+	     *
 	     * In fact this opens some interesting possibilities.
 	     * Suppose ssh2_userkey_loadpub() were able to load
 	     * public key files as well as extracting the public
@@ -604,11 +604,11 @@ int main(int argc, char **argv)
 
     /*
      * Determine the default output file, if none is provided.
-     * 
+     *
      * This will usually be equal to stdout, except that if the
      * input and output file formats are the same then the default
      * output is to overwrite the input.
-     * 
+     *
      * Also in this code, we bomb out if the input and output file
      * formats are the same and no other action is performed.
      */
@@ -779,7 +779,7 @@ int main(int argc, char **argv)
 		blob = (unsigned char *)vblob;
 
 		n = 4;		       /* skip modulus bits */
-		
+
 		l = ssh1_read_bignum(blob + n, bloblen - n,
 				     &ssh1key->exponent);
 		if (l < 0) {
@@ -908,7 +908,7 @@ int main(int argc, char **argv)
 
     /*
      * Write output.
-     * 
+     *
      * (In the case where outfile and outfiletmp are both NULL,
      * there is no semantic reason to initialise outfilename at
      * all; but we have to write _something_ to it or some compiler
@@ -1051,7 +1051,7 @@ int main(int argc, char **argv)
 	    sfree(fingerprint);
 	}
 	break;
-	
+
       case OPENSSH:
       case SSHCOM:
 	assert(sshver == 2);
@@ -1314,7 +1314,7 @@ int main(int argc, char **argv)
 	/*
 	 * Change the comment of the key; this _does_ require a
 	 * passphrase owing to the tamperproofing.
-	 * 
+	 *
 	 * NOTE: In SSH-1, this only requires a passphrase because
 	 * of inadequacies of the loading and saving mechanisms. In
 	 * _principle_, it should be perfectly possible to modify
@@ -1323,7 +1323,7 @@ int main(int argc, char **argv)
 	 * loading and saving mechanisms don't include a method of
 	 * loading all the key data without also trying to decrypt
 	 * the private section.
-	 * 
+	 *
 	 * I don't consider this to be a problem worth solving,
 	 * because (a) to fix it would probably end up bloating
 	 * PuTTY proper, and (b) SSH-1 is on the way out anyway so

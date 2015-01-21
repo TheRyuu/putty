@@ -504,7 +504,7 @@ static int save_ssh2_pubkey(char *filename, struct ssh2_userkey *key)
     }
     if (column > 0)
 	fputc('\n', fp);
-    
+
     fprintf(fp, "---- END SSH2 PUBLIC KEY ----\n");
     fclose(fp);
     sfree(pub_blob);

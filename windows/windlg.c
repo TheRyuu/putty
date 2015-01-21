@@ -534,9 +534,9 @@ static int CALLBACK GenericMainDlgProc(HWND hwnd, UINT msg,
 		TreeView_GetSelection(((LPNMHDR) lParam)->hwndFrom);
 	    TVITEM item;
 	    char buffer[64];
- 
+
  	    SendMessage (hwnd, WM_SETREDRAW, FALSE, 0);
- 
+
 	    item.hItem = i;
 	    item.pszText = buffer;
 	    item.cchTextMax = sizeof(buffer);
@@ -563,7 +563,7 @@ static int CALLBACK GenericMainDlgProc(HWND hwnd, UINT msg,
 	    create_controls(hwnd, (char *)item.lParam);
 
 	    dlg_refresh(NULL, &dp);    /* set up control values */
- 
+
 	    SendMessage (hwnd, WM_SETREDRAW, TRUE, 0);
  	    InvalidateRect (hwnd, NULL, TRUE);
 
@@ -893,7 +893,7 @@ int askappend(void *frontend, Filename *filename,
 
 /*
  * Warn about the obsolescent key file format.
- * 
+ *
  * Uniquely among these functions, this one does _not_ expect a
  * frontend handle. This means that if PuTTY is ported to a
  * platform which requires frontend handles, this function will be

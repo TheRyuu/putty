@@ -53,7 +53,7 @@
  * In practice, we pre-compute what will happen to crcword on any
  * given sequence of eight incoming bits, and store that in a table
  * which we then use at run-time to do the job:
- * 
+ *
  *   outgoingplusnew = (crcword & 0xFF) ^ newbyte;
  *   crcword = (crcword >> 8) ^ table[outgoingplusnew];
  *

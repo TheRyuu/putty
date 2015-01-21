@@ -101,18 +101,18 @@ char *canonify(char *name)
 	 * exist. So if the first call failed, we should strip off
 	 * everything from the last slash onwards and try again,
 	 * then put the final component back on.
-	 * 
+	 *
 	 * Special cases:
-	 * 
+	 *
 	 *  - if the last component is "/." or "/..", then we don't
 	 *    bother trying this because there's no way it can work.
-	 * 
+	 *
 	 *  - if the thing actually ends with a "/", we remove it
 	 *    before we start. Except if the string is "/" itself
 	 *    (although I can't see why we'd have got here if so,
 	 *    because surely "/" would have worked the first
 	 *    time?), in which case we don't bother.
-	 * 
+	 *
 	 *  - if there's no slash in the string at all, give up in
 	 *    confusion (we expect at least one because of the way
 	 *    we constructed the string).
@@ -340,7 +340,7 @@ int sftp_get_file(char *fname, char *outfname, int recurse, int restart)
 	     * this list that already exists. We may have to do a
 	     * reget on _that_ file, but shouldn't have to do
 	     * anything on the previous files.
-	     * 
+	     *
 	     * If none of them exists, of course, we start at 0.
 	     */
 	    i = 0;
@@ -369,7 +369,7 @@ int sftp_get_file(char *fname, char *outfname, int recurse, int restart)
 	    for (; i < nnames; i++) {
 		char *nextfname, *nextoutfname;
 		int ret;
-		
+
 		nextfname = dupcat(fname, "/", ournames[i]->filename, NULL);
                 nextoutfname = dir_file_cat(outfname, ournames[i]->filename);
 		ret = sftp_get_file(nextfname, nextoutfname, recurse, restart);
@@ -436,10 +436,10 @@ int sftp_get_file(char *fname, char *outfname, int recurse, int restart)
 	    req = fxp_close_send(fh);
             pktin = sftp_wait_for_reply(req);
 	    fxp_close_recv(pktin, req);
-		
+
 	    return 0;
 	}
-	    
+
 	offset = get_file_posn(file);
 	uint64_decimal(offset, decbuf);
 	printf("reget: restarting at file position %s\n", decbuf);
@@ -1904,12 +1904,12 @@ static struct sftp_cmd_lookup {
     char *name;
     /*
      * For help purposes, there are two kinds of command:
-     * 
+     *
      *  - primary commands, in which `longhelp' is non-NULL. In
      *    this case `shorthelp' is descriptive text, and `longhelp'
      *    is longer descriptive text intended to be printed after
      *    the command name.
-     * 
+     *
      *  - alias commands, in which `longhelp' is NULL. In this case
      *    `shorthelp' is the name of a primary command, which
      *    contains the help that should double up for this command.
@@ -2339,7 +2339,7 @@ static int do_sftp_init(void)
     struct sftp_request *req;
 
     /*
-     * Do protocol initialisation. 
+     * Do protocol initialisation.
      */
     if (!fxp_init()) {
 	fprintf(stderr,
@@ -2820,11 +2820,11 @@ static int psftp_connect(char *userhost, char *user, int portnumber)
      * try to find sftp-server in various places (the obvious
      * systemwide spots /usr/lib and /usr/local/lib, and then the
      * user's PATH) and finally give up.
-     * 
+     *
      *   test -x /usr/lib/sftp-server && exec /usr/lib/sftp-server
      *   test -x /usr/local/lib/sftp-server && exec /usr/local/lib/sftp-server
      *   exec sftp-server
-     * 
+     *
      * the idea being that this will attempt to use either of the
      * obvious pathnames and then give up, and when it does give up
      * it will print the preferred pathname in the error messages.

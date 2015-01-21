@@ -1,18 +1,18 @@
 /*
  * Zlib (RFC1950 / RFC1951) compression for PuTTY.
- * 
+ *
  * There will no doubt be criticism of my decision to reimplement
  * Zlib compression from scratch instead of using the existing zlib
  * code. People will cry `reinventing the wheel'; they'll claim
  * that the `fundamental basis of OSS' is code reuse; they'll want
  * to see a really good reason for me having chosen not to use the
  * existing code.
- * 
+ *
  * Well, here are my reasons. Firstly, I don't want to link the
  * whole of zlib into the PuTTY binary; PuTTY is justifiably proud
  * of its small size and I think zlib contains a lot of unnecessary
  * baggage for the kind of compression that SSH requires.
- * 
+ *
  * Secondly, I also don't like the alternative of using zlib.dll.
  * Another thing PuTTY is justifiably proud of is its ease of
  * installation, and the last thing I want to do is to start
@@ -20,7 +20,7 @@
  * zlib.dll kicking around, one with C calling conventions on the
  * exported functions and another with WINAPI conventions, and
  * there would be a significant danger of getting the wrong one.
- * 
+ *
  * Thirdly, there seems to be a difference of opinion on the IETF
  * secsh mailing list about the correct way to round off a
  * compressed packet and start the next. In particular, there's
@@ -28,7 +28,7 @@
  * capable of supporting (see below for an explanation). Given that
  * sort of uncertainty, I thought it might be better to have code
  * that will support even the zlib-incompatible worst case.
- * 
+ *
  * Fourthly, it's a _second implementation_. Second implementations
  * are fundamentally a Good Thing in standardisation efforts. The
  * difference of opinion mentioned above has arisen _precisely_
@@ -48,7 +48,7 @@
  * you're picking apart Zip files or PDFs or PNGs. If you compile
  * it with ZLIB_STANDALONE defined, it builds on its own and
  * becomes a command-line utility.
- * 
+ *
  * Therefore, here I provide a self-contained implementation of the
  * macros required from the rest of the PuTTY sources.
  */
@@ -358,7 +358,7 @@ static void lz77_compress(struct LZ77Context *ctx,
  * compressing a large file under no significant time constraint,
  * but when you're compressing little bits in real time, things get
  * hairier.
- * 
+ *
  * I suppose it's possible that I could compute Huffman trees based
  * on the frequencies in the _previous_ block, as a sort of
  * heuristic, but I'm not confident that the gain would balance out
@@ -531,7 +531,7 @@ static void zlib_match(struct LZ77Context *ectx, int distance, int len)
 	 * We can transmit matches of lengths 3 through 258
 	 * inclusive. So if len exceeds 258, we must transmit in
 	 * several steps, with 258 or less in each step.
-	 * 
+	 *
 	 * Specifically: if len >= 261, we can transmit 258 and be
 	 * sure of having at least 3 left for the next step. And if
 	 * len <= 258, we can just transmit len. But if len == 259
