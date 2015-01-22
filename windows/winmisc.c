@@ -82,7 +82,7 @@ void smemclr(void *b, size_t n) {
 char *get_username(void)
 {
     DWORD namelen;
-    char *user;
+    char *user = NULL;
     int got_username = FALSE;
     DECL_WINDOWS_FUNCTION(static, BOOLEAN, GetUserNameExA,
 			  (EXTENDED_NAME_FORMAT, LPSTR, PULONG));

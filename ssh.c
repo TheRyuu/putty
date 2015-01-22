@@ -4105,7 +4105,7 @@ static int do_ssh1_login(Ssh ssh, unsigned char *in, int inlen,
 		  filename_to_str(s->keyfile));
 	keytype = key_type(s->keyfile);
 	if (keytype == SSH_KEYTYPE_SSH1) {
-	    const char *error;
+	    const char *error = NULL;
 	    if (rsakey_pubblob(s->keyfile,
 			       &s->publickey_blob, &s->publickey_bloblen,
 			       &s->publickey_comment, &error)) {
@@ -8653,6 +8653,15 @@ static void ssh2_response_authconn(struct ssh_channel *c, struct Packet *pktin,
         do_ssh2_authconn(c->ssh, NULL, 0, pktin);
 }
 
+/**
+ * I can only guess that it's the coroutine macros causing this error:
+ * error C4703: potentially uninitialized local pointer variable 'methods' used
+ * Because it's defined as char *methods = NULL;
+ */
+#if _MSC_VER >= 1400
+#pragma warning(push)
+#pragma warning(disable : 4703)
+#endif
 static void do_ssh2_authconn(Ssh ssh, unsigned char *in, int inlen,
 			     struct Packet *pktin)
 {
@@ -10362,6 +10371,9 @@ static void do_ssh2_authconn(Ssh ssh, unsigned char *in, int inlen,
 
     crFinishV;
 }
+#if _MSC_VER >= 1400
+#pragma warning(pop)
+#endif
 
 /*
  * Handlers for SSH-2 messages that might arrive at any moment.

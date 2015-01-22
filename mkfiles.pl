@@ -1164,6 +1164,7 @@ if (defined $makefiles{'vstudio10'} || defined $makefiles{'vstudio12'}) {
             "      <PrecompiledHeaderOutputFile>.\\Release\\$windows_project.pch</PrecompiledHeaderOutputFile>\n" .
             "      <ObjectFileName>.\\Release\\</ObjectFileName>\n" .
             "      <ProgramDataBaseFileName>.\\Release\\</ProgramDataBaseFileName>\n" .
+            "      <SDLCheck>true</SDLCheck>\n" .
             "    </ClCompile>\n" .
             "    <Midl>\n" .
             "      <SuppressStartupBanner>true</SuppressStartupBanner>\n" .
