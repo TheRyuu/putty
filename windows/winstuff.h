@@ -10,6 +10,22 @@
 #endif
 #include <windows.h>
 #include <stdio.h>		       /* for FILENAME_MAX */
+/* VS2010+ have stdint.h */
+#if _MSC_VER >= 1600
+#include <stdint.h>
+#else
+/* C99 Compatible typedefs for versions lacking stdint */
+typedef signed char        int8_t;
+typedef short              int16_t;
+typedef int                int32_t;
+typedef long long          int64_t;
+typedef unsigned char      uint8_t;
+typedef unsigned short     uint16_t;
+typedef unsigned int       uint32_t;
+typedef unsigned long long uint64_t;
+#endif
+typedef uint32_t uint32; /* int is 32-bits on Win32 and Win64. */
+#define PUTTY_UINT32_DEFINED
 
 #include "tree234.h"
 
@@ -152,9 +168,6 @@ typedef struct terminal_tag Terminal;
 #define USES_VTLINE_HACK
 
 typedef HDC Context;
-
-typedef unsigned int uint32; /* int is 32-bits on Win32 and Win64. */
-#define PUTTY_UINT32_DEFINED
 
 #ifndef NO_GSSAPI
 /*
