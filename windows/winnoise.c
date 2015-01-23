@@ -9,15 +9,10 @@
 #include "ssh.h"
 #include "storage.h"
 
-#include <wincrypt.h>
-
-DECL_WINDOWS_FUNCTION(static, BOOL, CryptAcquireContextA,
-                      (HCRYPTPROV *, LPCTSTR, LPCTSTR, DWORD, DWORD));
-DECL_WINDOWS_FUNCTION(static, BOOL, CryptGenRandom,
-                      (HCRYPTPROV, DWORD, BYTE *));
-DECL_WINDOWS_FUNCTION(static, BOOL, CryptReleaseContext,
-                      (HCRYPTPROV, DWORD));
-static HMODULE wincrypt_module = NULL;
+/* Fix calling convention for RtlGenRandom */
+#define SystemFunction036 NTAPI SystemFunction036
+#include <NTSecAPI.h>
+#undef SystemFunction036
 
 /*
  * This function is called once, at PuTTY startup.
@@ -28,7 +23,6 @@ void noise_get_heavy(void (*func) (void *, int))
     HANDLE srch;
     WIN32_FIND_DATA finddata;
     DWORD pid;
-    HCRYPTPROV crypt_provider;
     char winpath[MAX_PATH + 3];
 
     GetWindowsDirectory(winpath, sizeof(winpath));
@@ -44,23 +38,9 @@ void noise_get_heavy(void (*func) (void *, int))
     pid = GetCurrentProcessId();
     func(&pid, sizeof(pid));
 
-    if (!wincrypt_module) {
-        wincrypt_module = load_system32_dll("advapi32.dll");
-        GET_WINDOWS_FUNCTION(wincrypt_module, CryptAcquireContextA);
-        GET_WINDOWS_FUNCTION(wincrypt_module, CryptGenRandom);
-        GET_WINDOWS_FUNCTION(wincrypt_module, CryptReleaseContext);
-    }
-
-    if (wincrypt_module && p_CryptAcquireContextA &&
-        p_CryptGenRandom && p_CryptReleaseContext &&
-        p_CryptAcquireContextA(&crypt_provider, NULL, NULL, PROV_RSA_FULL,
-                               CRYPT_VERIFYCONTEXT)) {
-        BYTE buf[32];
-        if (p_CryptGenRandom(crypt_provider, 32, buf)) {
-            func(buf, sizeof(buf));
-        }
-        p_CryptReleaseContext(crypt_provider, 0);
-    }
+    BYTE buf[32];
+    if (RtlGenRandom(buf, sizeof(buf)))
+	func(buf, sizeof(buf));
 
     read_random_seed(func);
     /* Update the seed immediately, in case another instance uses it. */
