@@ -14,10 +14,16 @@
 #include <NTSecAPI.h>
 #undef SystemFunction036
 
+void platform_genrandom(void *buf, size_t length)
+{
+    /* This should never fail */
+    if (!RtlGenRandom(buf, length))
+	modalfatalbox("Windows RNG Error");
+}
+
 /*
  * This function is called once, at PuTTY startup.
  */
-
 void noise_get_heavy(void (*func) (void *, int))
 {
     HANDLE srch;
@@ -38,9 +44,9 @@ void noise_get_heavy(void (*func) (void *, int))
     pid = GetCurrentProcessId();
     func(&pid, sizeof(pid));
 
-    BYTE buf[32];
-    if (RtlGenRandom(buf, sizeof(buf)))
-	func(buf, sizeof(buf));
+    uint32_t buf[32];
+    platform_genrandom(buf, sizeof(buf));
+    func(buf, sizeof(buf));
 
     read_random_seed(func);
     /* Update the seed immediately, in case another instance uses it. */

@@ -926,6 +926,7 @@ FontSpec *fontspec_deserialise(void *data, int maxsize, int *used);
 /*
  * Exports from noise.c.
  */
+void platform_genrandom(void *buf, size_t length);
 void noise_get_heavy(void (*func) (void *, int));
 void noise_get_light(void (*func) (void *, int));
 void noise_regular(void);
