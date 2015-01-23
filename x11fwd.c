@@ -420,7 +420,7 @@ static char *x11_verify(unsigned long peer_ip, int peer_port,
 	    if (data[i] != 0)	       /* zero padding wrong */
 		return "XDM-AUTHORIZATION-1 data failed check";
 	tim = time(NULL);
-	if (abs(t - tim) > XDM_MAXSKEW)
+	if (llabs(t - tim) > XDM_MAXSKEW)
 	    return "XDM-AUTHORIZATION-1 time stamp was too far out";
 	seen = snew(struct XDMSeen);
 	seen->time = t;
